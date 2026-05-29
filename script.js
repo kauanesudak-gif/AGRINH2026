@@ -1,73 +1,77 @@
-const soja = document.getElementById("soja");
+const rainBtn = document.getElementById("rainBtn");
+const sunBtn = document.getElementById("sunBtn");
+const futureBtn = document.getElementById("futureBtn");
+const resetBtn = document.getElementById("resetBtn");
 
 const growthText = document.getElementById("growthText");
 const waterText = document.getElementById("waterText");
 const ecoText = document.getElementById("ecoText");
 
+const rainSound = document.getElementById("rainSound");
+
+const tractor = document.getElementById("tractor");
+
+const soyPlants = document.querySelectorAll(".soy");
+const leaves = document.querySelectorAll(".leaf");
+
 const message = document.getElementById("message");
-
-const waterBtn = document.getElementById("waterBtn");
-const sunBtn = document.getElementById("sunBtn");
-const harvestBtn = document.getElementById("harvestBtn");
-const resetBtn = document.getElementById("resetBtn");
-
-const folhas = document.querySelectorAll(".folha");
 
 let growth = 0;
 let water = 50;
 let eco = 100;
 
-function updatePlant(){
+function updateFarm(){
 
   growthText.innerText = growth + "%";
   waterText.innerText = water + "%";
   ecoText.innerText = eco + "%";
 
-  soja.style.height = (120 + growth * 2) + "px";
+  soyPlants.forEach(soy => {
 
-  // mudança de cor da soja
+    soy.style.height = (100 + growth * 2) + "px";
+
+  });
+
+  // mudança de cor
 
   if(growth < 30){
 
-    folhas.forEach(folha => {
-      folha.style.background = "#2e7d32";
-    });
-
-  } else if(growth < 70){
-
-    folhas.forEach(folha => {
-      folha.style.background = "#7cb342";
-    });
-
-  } else {
-
-    folhas.forEach(folha => {
-      folha.style.background = "#c0ca33";
+    leaves.forEach(leaf => {
+      leaf.style.background = "#2e7d32";
     });
 
   }
 
-  // sustentabilidade
+  else if(growth < 70){
 
-  if(eco < 40){
+    leaves.forEach(leaf => {
+      leaf.style.background = "#8bc34a";
+    });
 
-    message.innerText =
-      "⚠️ O meio ambiente está sofrendo impacto!";
+  }
+
+  else{
+
+    leaves.forEach(leaf => {
+      leaf.style.background = "#d4e157";
+    });
 
   }
 
   if(growth >= 100){
 
     message.innerText =
-      "🌾 A soja amadureceu com sucesso sustentável!";
+      "🌾 Plantação pronta para colheita sustentável!";
 
   }
 
 }
 
-waterBtn.addEventListener("click", () => {
+rainBtn.addEventListener("click", () => {
 
   createRain();
+
+  rainSound.play();
 
   growth += 10;
   water += 10;
@@ -80,52 +84,43 @@ waterBtn.addEventListener("click", () => {
     water = 100;
   }
 
-  eco += 2;
-
-  if(eco > 100){
-    eco = 100;
-  }
-
   message.innerText =
-    "🌧️ Irrigação sustentável aplicada!";
+    "🌧️ Irrigação inteligente ativada!";
 
-  updatePlant();
+  updateFarm();
 
 });
 
 sunBtn.addEventListener("click", () => {
 
   growth += 5;
-  water -= 5;
 
-  if(growth > 100){
-    growth = 100;
-  }
+  water -= 5;
 
   if(water < 0){
     water = 0;
   }
 
-  message.innerText =
-    "☀️ A luz solar acelerou o crescimento!";
+  if(growth > 100){
+    growth = 100;
+  }
 
-  updatePlant();
+  message.innerText =
+    "☀️ Energia solar acelerou o crescimento!";
+
+  updateFarm();
 
 });
 
-harvestBtn.addEventListener("click", () => {
+futureBtn.addEventListener("click", () => {
 
-  if(growth >= 100){
+  document.body.classList.toggle("future-mode");
 
-    message.innerText =
-      "🚜 Colheita realizada com responsabilidade ambiental!";
+  tractor.style.animation =
+    "tractorMove 8s linear infinite";
 
-  } else {
-
-    message.innerText =
-      "🌱 A soja ainda não está pronta para colheita.";
-
-  }
+  message.innerText =
+    "🛰️ Agro 2050 ativado: drones, IA e sustentabilidade!";
 
 });
 
@@ -135,37 +130,61 @@ resetBtn.addEventListener("click", () => {
   water = 50;
   eco = 100;
 
-  message.innerText =
-    "🌿 Nova plantação iniciada.";
+  document.body.classList.remove("future-mode");
 
-  updatePlant();
+  tractor.style.animation = "none";
+
+  message.innerText =
+    "🌱 Nova safra iniciada.";
+
+  updateFarm();
 
 });
 
 function createRain(){
 
-  for(let i = 0; i < 80; i++){
+  for(let i = 0; i < 120; i++){
 
-    const rain = document.createElement("div");
+    const drop = document.createElement("div");
 
-    rain.classList.add("raindrop");
+    drop.classList.add("raindrop");
 
-    rain.style.left =
+    drop.style.left =
       Math.random() * window.innerWidth + "px";
 
-    rain.style.top = "0px";
+    drop.style.top = "0px";
 
-    rain.style.animationDuration =
+    drop.style.animationDuration =
       (Math.random() * 1 + 0.5) + "s";
 
-    document.body.appendChild(rain);
+    document.body.appendChild(drop);
 
     setTimeout(() => {
-      rain.remove();
+      drop.remove();
     }, 2000);
 
   }
 
 }
 
-updatePlant();
+const style = document.createElement("style");
+
+style.innerHTML = `
+
+@keyframes tractorMove{
+
+  from{
+    left:-200px;
+  }
+
+  to{
+    left:110%;
+  }
+
+}
+
+`;
+
+document.head.appendChild(style);
+
+updateFarm();
