@@ -10,62 +10,70 @@
 
   <header>
     <h1>🌱 Agro Forte, Futuro Sustentável</h1>
-    <p>Equilíbrio entre produção e meio ambiente</p>
+    <p>Simulação interativa do crescimento da soja</p>
   </header>
 
-  <section class="hero">
-    <div class="sun"></div>
+  <section class="game">
+
+    <div class="sky">
+      <div class="sun" id="sun"></div>
+      <div class="cloud"></div>
+    </div>
+
+    <div class="info-panel">
+
+      <div class="status">
+        <h2>🌿 Nível da Plantação</h2>
+        <div id="level">0%</div>
+      </div>
+
+      <div class="status">
+        <h2>💧 Água</h2>
+        <div id="water">50%</div>
+      </div>
+
+      <div class="status">
+        <h2>🌎 Sustentabilidade</h2>
+        <div id="eco">100%</div>
+      </div>
+
+    </div>
 
     <div class="field">
-      <div class="soy soy1"></div>
-      <div class="soy soy2"></div>
-      <div class="soy soy3"></div>
-      <div class="soy soy4"></div>
-      <div class="soy soy5"></div>
+
+      <div class="soil"></div>
+
+      <div class="soy-container">
+
+        <div class="soy">
+          <div class="stem"></div>
+          <div class="leaf left"></div>
+          <div class="leaf right"></div>
+        </div>
+
+      </div>
+
     </div>
 
-    <button id="rainBtn">🌧️ Fazer Chover</button>
-    <button id="themeBtn">🌙 Mudar Clima</button>
-
-    <div id="rainContainer"></div>
-  </section>
-
-  <section class="info">
-    <h2>🌿 Sustentabilidade no Campo</h2>
-
-    <p>
-      A produção de soja pode crescer junto com a preservação ambiental.
-      Tecnologias sustentáveis ajudam a economizar água, proteger o solo
-      e reduzir impactos na natureza.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>💧 Economia de Água</h3>
-        <p>Irrigação inteligente reduz desperdícios.</p>
-      </div>
-
-      <div class="card">
-        <h3>🌳 Preservação</h3>
-        <p>Áreas verdes ajudam no equilíbrio ambiental.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚜 Tecnologia</h3>
-        <p>Máquinas modernas aumentam a produtividade.</p>
-      </div>
+    <div class="controls">
+      <button id="rainBtn">🌧️ Regar</button>
+      <button id="sunBtn">☀️ Luz Solar</button>
+      <button id="fertilizerBtn">🧪 Fertilizante</button>
+      <button id="resetBtn">🔄 Reiniciar</button>
     </div>
-  </section>
 
-  <section class="counter">
-    <h2>🌎 Índice Sustentável</h2>
-    <div id="score">0%</div>
+    <div class="message" id="message">
+      Cuide da soja usando recursos sustentáveis 🌱
+    </div>
+
   </section>
 
   <footer>
-    <p>Projeto Agrinho 2026 - Desenvolvido por estudante do 1º ano 🌱</p>
+    Projeto Agrinho 2026 • Sustentabilidade no Campo 🌎
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
+
+
