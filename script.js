@@ -1,103 +1,131 @@
-const soy = document.querySelector(".soy");
+const soja = document.getElementById("soja");
 
-const levelText = document.getElementById("level");
-const waterText = document.getElementById("water");
-const ecoText = document.getElementById("eco");
+const growthText = document.getElementById("growthText");
+const waterText = document.getElementById("waterText");
+const ecoText = document.getElementById("ecoText");
+
 const message = document.getElementById("message");
 
-const rainBtn = document.getElementById("rainBtn");
+const waterBtn = document.getElementById("waterBtn");
 const sunBtn = document.getElementById("sunBtn");
-const fertilizerBtn = document.getElementById("fertilizerBtn");
+const harvestBtn = document.getElementById("harvestBtn");
 const resetBtn = document.getElementById("resetBtn");
+
+const folhas = document.querySelectorAll(".folha");
 
 let growth = 0;
 let water = 50;
-let sustainability = 100;
+let eco = 100;
 
-function updateScreen(){
+function updatePlant(){
 
-  levelText.innerText = growth + "%";
+  growthText.innerText = growth + "%";
   waterText.innerText = water + "%";
-  ecoText.innerText = sustainability + "%";
+  ecoText.innerText = eco + "%";
 
-  soy.style.height = (80 + growth * 2) + "px";
+  soja.style.height = (120 + growth * 2) + "px";
 
-  if(growth >= 100){
-    message.innerText = "🌾 A soja cresceu com sucesso sustentável!";
+  // mudança de cor da soja
+
+  if(growth < 30){
+
+    folhas.forEach(folha => {
+      folha.style.background = "#2e7d32";
+    });
+
+  } else if(growth < 70){
+
+    folhas.forEach(folha => {
+      folha.style.background = "#7cb342";
+    });
+
+  } else {
+
+    folhas.forEach(folha => {
+      folha.style.background = "#c0ca33";
+    });
+
   }
 
-  if(sustainability <= 30){
-    message.innerText = "⚠️ Sustentabilidade baixa! Preserve o meio ambiente.";
+  // sustentabilidade
+
+  if(eco < 40){
+
+    message.innerText =
+      "⚠️ O meio ambiente está sofrendo impacto!";
+
+  }
+
+  if(growth >= 100){
+
+    message.innerText =
+      "🌾 A soja amadureceu com sucesso sustentável!";
+
   }
 
 }
 
-rainBtn.addEventListener("click", () => {
+waterBtn.addEventListener("click", () => {
 
   createRain();
 
-  water += 10;
-
-  if(water > 100){
-    water = 100;
-  }
-
   growth += 10;
+  water += 10;
 
   if(growth > 100){
     growth = 100;
   }
 
-  sustainability += 5;
-
-  if(sustainability > 100){
-    sustainability = 100;
+  if(water > 100){
+    water = 100;
   }
 
-  message.innerText = "🌧️ Irrigação sustentável aplicada!";
+  eco += 2;
 
-  updateScreen();
+  if(eco > 100){
+    eco = 100;
+  }
+
+  message.innerText =
+    "🌧️ Irrigação sustentável aplicada!";
+
+  updatePlant();
 
 });
 
 sunBtn.addEventListener("click", () => {
 
   growth += 5;
+  water -= 5;
 
   if(growth > 100){
     growth = 100;
   }
-
-  water -= 5;
 
   if(water < 0){
     water = 0;
   }
 
-  message.innerText = "☀️ A luz solar ajudou no crescimento!";
+  message.innerText =
+    "☀️ A luz solar acelerou o crescimento!";
 
-  updateScreen();
+  updatePlant();
 
 });
 
-fertilizerBtn.addEventListener("click", () => {
+harvestBtn.addEventListener("click", () => {
 
-  growth += 20;
+  if(growth >= 100){
 
-  sustainability -= 15;
+    message.innerText =
+      "🚜 Colheita realizada com responsabilidade ambiental!";
 
-  if(growth > 100){
-    growth = 100;
+  } else {
+
+    message.innerText =
+      "🌱 A soja ainda não está pronta para colheita.";
+
   }
-
-  if(sustainability < 0){
-    sustainability = 0;
-  }
-
-  message.innerText =
-    "🧪 Fertilizante acelerou a produção, mas impactou o meio ambiente.";
-
-  updateScreen();
 
 });
 
@@ -105,36 +133,39 @@ resetBtn.addEventListener("click", () => {
 
   growth = 0;
   water = 50;
-  sustainability = 100;
+  eco = 100;
 
   message.innerText =
-    "🌱 Nova plantação iniciada.";
+    "🌿 Nova plantação iniciada.";
 
-  updateScreen();
+  updatePlant();
 
 });
 
 function createRain(){
 
-  for(let i = 0; i < 100; i++){
+  for(let i = 0; i < 80; i++){
 
-    const drop = document.createElement("div");
+    const rain = document.createElement("div");
 
-    drop.classList.add("raindrop");
+    rain.classList.add("raindrop");
 
-    drop.style.left = Math.random() * window.innerWidth + "px";
+    rain.style.left =
+      Math.random() * window.innerWidth + "px";
 
-    drop.style.animationDuration =
+    rain.style.top = "0px";
+
+    rain.style.animationDuration =
       (Math.random() * 1 + 0.5) + "s";
 
-    document.body.appendChild(drop);
+    document.body.appendChild(rain);
 
     setTimeout(() => {
-      drop.remove();
+      rain.remove();
     }, 2000);
 
   }
 
 }
 
-updateScreen();
+updatePlant();

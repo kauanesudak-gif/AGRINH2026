@@ -3,77 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agro Forte - Futuro Sustentável</title>
+  <title>Soja Sustentável</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header>
     <h1>🌱 Agro Forte, Futuro Sustentável</h1>
-    <p>Simulação interativa do crescimento da soja</p>
+    <p>Simulação interativa da plantação de soja</p>
   </header>
 
-  <section class="game">
+  <main>
 
-    <div class="sky">
-      <div class="sun" id="sun"></div>
-      <div class="cloud"></div>
-    </div>
+    <section class="painel">
 
-    <div class="info-panel">
-
-      <div class="status">
-        <h2>🌿 Nível da Plantação</h2>
-        <div id="level">0%</div>
+      <div class="card">
+        <h2>🌾 Crescimento</h2>
+        <span id="growthText">0%</span>
       </div>
 
-      <div class="status">
+      <div class="card">
         <h2>💧 Água</h2>
-        <div id="water">50%</div>
+        <span id="waterText">50%</span>
       </div>
 
-      <div class="status">
+      <div class="card">
         <h2>🌎 Sustentabilidade</h2>
-        <div id="eco">100%</div>
+        <span id="ecoText">100%</span>
       </div>
 
-    </div>
+    </section>
 
-    <div class="field">
+    <section class="campo">
 
-      <div class="soil"></div>
+      <div class="ceu">
+        <div class="sol"></div>
+      </div>
 
-      <div class="soy-container">
+      <div class="plantacao">
 
-        <div class="soy">
-          <div class="stem"></div>
-          <div class="leaf left"></div>
-          <div class="leaf right"></div>
+        <div class="soja" id="soja">
+          <div class="caule"></div>
+
+          <div class="folha folha1"></div>
+          <div class="folha folha2"></div>
+          <div class="folha folha3"></div>
+          <div class="folha folha4"></div>
         </div>
 
       </div>
 
-    </div>
+      <div class="terra"></div>
 
-    <div class="controls">
-      <button id="rainBtn">🌧️ Regar</button>
-      <button id="sunBtn">☀️ Luz Solar</button>
-      <button id="fertilizerBtn">🧪 Fertilizante</button>
+    </section>
+
+    <section class="controles">
+
+      <button id="waterBtn">🌧️ Regar</button>
+
+      <button id="sunBtn">☀️ Sol</button>
+
+      <button id="harvestBtn">🌾 Colheita</button>
+
       <button id="resetBtn">🔄 Reiniciar</button>
+
+    </section>
+
+    <div class="mensagem" id="message">
+      Cuide da soja sem prejudicar o meio ambiente 🌿
     </div>
 
-    <div class="message" id="message">
-      Cuide da soja usando recursos sustentáveis 🌱
-    </div>
-
-  </section>
+  </main>
 
   <footer>
-    Projeto Agrinho 2026 • Sustentabilidade no Campo 🌎
+    Projeto Agrinho 2026 🌎
   </footer>
 
   <script src="script.js"></script>
+
 </body>
 </html>
-
-
