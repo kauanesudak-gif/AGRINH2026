@@ -1,85 +1,86 @@
+// Controle de Elementos do Game
 const btnChuva = document.getElementById('btn-chuva');
 const btnColher = document.getElementById('btn-colher');
-const chuvaContainer = document.getElementById('chuva-container');
-const campo = document.getElementById('campo');
-const maquina = document.getElementById('maquina');
-const statusSilo = document.getElementById('status-silo');
+const chuvaEfeito = document.getElementById('chuva-efeito');
+const campoSoja = document.getElementById('campo-soja');
+const veiculoAgricola = document.getElementById('veiculo-agricola');
+const displaySilo = document.getElementById('display-silo');
 
-const numPlantas = 12; // Menos plantas para que fiquem maiores na tela
-const fasesSoja = { semente: '🌱', broto: '🌿', madura: '🌾' };
+const qtdPlantas = 10; // Reduzido para aumentar o espaçamento e visualização
+const iconesCiclo = { semente: '🌱', broto: '🌿', maduro: '🌾' };
 
-// Desenha a plantação inicial na tela
-function construirPlantacao() {
-    campo.innerHTML = '';
-    for (let i = 0; i < numPlantas; i++) {
+// Função Inicial: Preparar o Solo com Sementes
+function iniciarNovoJogo() {
+    campoSoja.innerHTML = '';
+    for (let i = 0; i < qtdPlantas; i++) {
         const planta = document.createElement('div');
-        planta.classList.add('soja');
-        planta.innerText = fasesSoja.semente;
-        campo.appendChild(planta);
+        planta.classList.add('planta-soja');
+        planta.innerText = iconesCiclo.semente;
+        campoSoja.appendChild(planta);
     }
 }
 
-// Ativa a chuva inteligente e faz a soja crescer e mudar de cor
+// Mecanismo 1: Sistema de Chuva e Crescimento Foliar
 btnChuva.addEventListener('click', () => {
     btnChuva.disabled = true;
-    chuvaContainer.className = 'chuva-ativa';
+    chuvaEfeito.className = 'chuva-ligada';
 
-    // 1º Estágio: Broto verde crescendo
+    // Tempo 1: Soja absorve água e vira broto verde
     setTimeout(() => {
-        atualizarSoja('crescendo', fasesSoja.broto);
+        mudarEstagioSoja('fase-broto', iconesCiclo.broto);
     }, 2000);
 
-    // 2º Estágio: Maduro e Dourado pronto para a colheitadeira
+    // Tempo 2: Soja atinge maturação dourada ideal
     setTimeout(() => {
-        atualizarSoja('madura', fasesSoja.madura);
-        chuvaContainer.className = 'chuva-desativada'; // Desliga a água
-        btnColher.disabled = false; // Libera o botão de colher
+        mudarEstagioSoja('fase-madura', iconesCiclo.maduro);
+        chuvaEfeito.className = 'chuva-desligada'; // Desliga automação de água
+        btnColher.disabled = false; // Desbloqueia controle da máquina
     }, 4500);
 });
 
-function atualizarSoja(classeVisual, emoji) {
-    const plantas = document.querySelectorAll('.soja');
-    plantas.forEach(planta => {
-        planta.className = `soja ${classeVisual}`;
-        planta.innerText = emoji;
+function mudarEstagioSoja(novaClasse, novoEmoji) {
+    const sementes = document.querySelectorAll('.planta-soja');
+    sementes.forEach(item => {
+        item.className = `planta-soja ${novaClasse}`;
+        item.innerText = novoEmoji;
     });
 }
 
-// Faz a grande colheitadeira passar colhendo e enchendo o silo perto da fazenda
+// Mecanismo 2: Colheita Mecanizada e Armazenamento em Silo
 btnColher.addEventListener('click', () => {
     btnColher.disabled = true;
     
-    // Movimenta a grande máquina até o outro lado da tela
-    maquina.style.left = '900px';
+    // Movimenta o vetor da colheitadeira ao longo do eixo X (horizontal)
+    veiculoAgricola.style.left = '950px';
 
-    const plantas = document.querySelectorAll('.soja');
+    const plantasNoCampo = document.querySelectorAll('.planta-soja');
     
-    // Sumir com as plantas à medida que a máquina passa e alimentar o Silo
-    plantas.forEach((planta, index) => {
+    // Efeito de corte progressivo baseado na passagem física do maquinário
+    plantasNoCampo.forEach((alvo, posicao) => {
         setTimeout(() => {
-            planta.classList.add('colhida');
+            alvo.classList.add('fase-colhida');
             
-            // Cálculos de porcentagem de armazenamento do silo
-            let totalSilo = Math.round(((index + 1) / numPlantas) * 100);
-            statusSilo.innerText = `${totalSilo}%`;
-        }, index * 300 + 1000); // Sincronia perfeita com o tamanho da máquina
+            // Incremento digital imediato do silo acoplado à fazenda
+            let cargaAtual = Math.round(((posicao + 1) / qtdPlantas) * 100);
+            displaySilo.innerText = `${cargaAtual}%`;
+        }, posicao * 350 + 1000); // Sincronização calculada
     });
 
-    // Conclusão e reinício automático
+    // Fim da rodada e ciclo de sustentabilidade concluído
     setTimeout(() => {
-        statusSilo.innerText = "100%";
-        alert("Sucesso! Colheita realizada com tecnologia sustentável de alta produtividade!");
+        displaySilo.innerText = "100%";
+        alert("Parabéns! Missão Cumprida: Alimento colhido com sucesso e armazenado no silo usando 100% de energia limpa!");
         
-        // Retorna tudo ao padrão para demonstração contínua
+        // Sistema de auto-reset para demonstração infinita no estande do Agrinho
         setTimeout(() => {
-            maquina.style.left = '-220px';
-            statusSilo.innerText = "0%";
+            veiculoAgricola.style.left = '-240px';
+            displaySilo.innerText = "0%";
             btnChuva.disabled = false;
-            construirPlantacao();
+            iniciarNovoJogo();
         }, 3000);
 
     }, 5500);
 });
 
-// Inicializa a maquete digital
-construirPlantacao();
+// Inicialização Automática do Game
+iniciarNovoJogo();

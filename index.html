@@ -3,61 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrinho: Agro Forte e Sustentável</title>
+    <title>Mini Game: AgroForte 2050</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>AGRO FORTE, FUTURO SUSTENTÁVEL</h1>
-        <p>O Equilíbrio Perfeito entre Produção e Meio Ambiente</p>
-        <div class="paineis-controle">
-            <button id="btn-chuva">🌧️ Ativar Chuva Inteligente</button>
-            <button id="btn-colher" disabled>🚜 Iniciar Grande Colheita</button>
-        </div>
-    </header>
-
-    <main class="cenario">
-        <div class="ceu">
-            <div class="passaro p1">🦅</div>
-            <div class="passaro p2">🦅</div>
+    <div class="interface-jogo">
+        <header>
+            <h1>AGROFORTE GIGANTE: MINI GAME SUSTENTÁVEL</h1>
+            <p>Objetivo: Ative a chuva inteligente, espere a soja amadurecer e controle a colheitadeira!</p>
             
-            <div class="painel-solar-gigante">
-                <div class="placa-solar"></div>
-                <div class="placa-solar"></div>
-                <p>☀️ ENERGIA LIMPA</p>
+            <div class="painel-comandos">
+                <button id="btn-chuva" class="btn-acao">🌧️ Ativar Chuva Inteligente</button>
+                <button id="btn-colher" class="btn-acao" disabled>🚜 Dirigir Colheitadeira</button>
             </div>
-        </div>
+        </header>
 
-        <div id="chuva-container" class="chuva-desativada"></div>
-
-        <div class="estruturas-grupo">
-            <div class="grande-fazenda">🏡<br><span class="legenda">SEDE</span></div>
-            <div class="grande-silo">
-                <div class="tampa-silo"></div>
-                <div class="corpo-silo">
-                    <p>SILO 2050</p>
-                    <div id="status-silo">0%</div>
+        <div class="tela-jogo">
+            <div class="camada-ceu">
+                <div class="grande-passaro p1">🦅</div>
+                <div class="grande-passaro p2">🦅</div>
+                
+                <div class="sistema-solar">
+                    <div class="painel"></div>
+                    <div class="painel"></div>
+                    <p>🔋 ECO ENERGIA 100%</p>
                 </div>
             </div>
-        </div>
 
-        <div class="campo-soja-grande" id="campo">
+            <div id="chuva-efeito" class="chuva-desligada"></div>
+
+            <div class="zona-estruturas">
+                <div class="casa-fazenda">🏡<br><span>SEDE</span></div>
+                <div class="silo-armazenamento">
+                    <div class="cone-silo"></div>
+                    <div class="tanque-silo">
+                        <p>SILO</p>
+                        <div id="display-silo">0%</div>
+                    </div>
+                </div>
             </div>
 
-        <div class="colheitadeira-gigante" id="maquina">
-            <div class="cabine-grande">
-                <div class="grande-operador" title="Produtor do Futuro">🧑‍🌾</div>
-            </div>
-            <div class="chassi-maquina"></div>
-            <div class="plataforma-frontal"></div>
-            <div class="grandes-rodas">⚙️ ⚙️</div>
-        </div>
-    </main>
+            <div class="campo-producao" id="campo-soja">
+                </div>
 
-    <footer>
-        <p>Projeto Agrinho — Conectando a tecnologia do futuro com a preservação ambiental.</p>
-    </footer>
+            <div class="super-colheitadeira" id="veiculo-agricola">
+                <div class="cabine-piloto">
+                    <div class="piloto-agricultor">🧑‍🌾</div>
+                </div>
+                <div class="chassi-veiculo"></div>
+                <div class="sistema-corte"></div>
+                <div class="esteiras-rodas">⚙️ ⚙️</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Missão Agrinho: Produzir com tecnologia protegendo o meio ambiente.</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
