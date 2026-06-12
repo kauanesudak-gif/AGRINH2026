@@ -1,4 +1,3 @@
-// Seleção dos elementos do DOM
 const btnIrrigar = document.getElementById('btn-irrigar');
 const btnColher = document.getElementById('btn-colher');
 const btnArmazenar = document.getElementById('btn-armazenar');
@@ -12,94 +11,81 @@ const statusEtapa = document.getElementById('status-etapa');
 const infoTitulo = document.getElementById('info-titulo');
 const infoDescricao = document.getElementById('info-descricao');
 
-// Dados explicativos para cada etapa (Unindo Agro e Sustentabilidade)
-const textosInformativos = {
+// Base de conhecimento das fases de transição sustentável 2050
+const fluxoEtapas = {
     irrigacao: {
-        titulo: "Etapa 1: Irrigação Inteligente e Sustentável",
-        descricao: "Utilizamos sensores de umidade no solo e previsões climáticas em tempo real. A água é aplicada na quantidade exata, evitando desperdício e protegendo os lençóis freáticos, garantindo uma produção forte com baixo impacto hídrico."
+        status: "Fase 1: Gotejamento automatizado ativado.",
+        titulo: "Gestão Hídrica Consciente",
+        descricao: "Os sistemas de irrigação coletam energia dos painéis fotovoltaicos superiores. A água só é liberada após sensores de subsuperfície validarem a real necessidade hídrica da soja, eliminando perdas por evaporação."
     },
     colheita: {
-        titulo: "Etapa 2: A Força da Colheita Autônoma e Eficiente",
-        descricao: "A Colheitadeira Inteligente entra em ação. Guiada por GPS de alta precisão e equipada com Inteligência Artificial, ela mapeia o rendimento da lavoura e otimiza a rota, reduzindo o consumo de combustível e a compactação do solo, demonstrando o poder da tecnologia no campo."
+        status: "Fase 2: Maquinário inteligente operando em campo.",
+        titulo: "Eficiência Máxima no Campo (Combustível Limpo)",
+        descricao: "A colheitadeira guiada por geoprocessamento avança com precisão milimétrica. A IA otimiza as manobras para gastar menos energia e evitar o esmagamento do solo, provando a força industrial aliada à conservação."
     },
     armazenamento: {
-        titulo: "Etapa 3: Rastreabilidade e Segurança Alimentar",
-        descricao: "O silo se enche. Com monitoramento digital de temperatura e umidade, garantimos a qualidade dos grãos por mais tempo, reduzindo perdas pós-colheita e garantindo a rastreabilidade necessária para os mercados mais exigentes."
+        status: "Fase 3: Silo abastecido com monitoramento termo-digital.",
+        titulo: "Estocagem Inteligente com Emissão Zero",
+        descricao: "Os grãos chegam ao Silo 2050. Todo o sistema de ventilação, resfriamento e conservação dos grãos é mantido de forma autônoma pela energia solar armazenada em baterias, zerando a pegada de carbono pós-colheita."
     }
 };
 
-// Funções de interação
-
-// 1. Ativar Irrigação e Crescer a Soja
+// Ação 1: Irrigação e Desenvolvimento da Cultura
 btnIrrigar.addEventListener('click', () => {
-    // Feedback visual imediato
-    statusEtapa.innerText = "Irrigando a Lavour... Aguarde o crescimento.";
+    statusEtapa.innerText = fluxoEtapas.irrigacao.status;
     efeitoIrrigacao.classList.remove('esconder');
     
-    // Atualizar card de texto
-    infoTitulo.innerText = textosInformativos.irrigacao.titulo;
-    infoDescricao.innerText = textosInformativos.irrigacao.descricao;
+    infoTitulo.innerText = fluxoEtapas.irrigacao.titulo;
+    infoDescricao.innerText = fluxoEtapas.irrigacao.descricao;
     
-    // Gerenciar Botões
     btnIrrigar.disabled = true;
     btnIrrigar.classList.remove('active');
 
-    // Simulação do crescimento após a irrigação
     setTimeout(() => {
         efeitoIrrigacao.classList.add('esconder');
         plantaSoja.innerText = "🌿";
         plantaSoja.classList.add('crescida');
-        statusEtapa.innerText = "Soja Pronta para a Colheita!";
+        statusEtapa.innerText = "Soja Desenvolvida e Pronta para Processamento.";
         
-        // Habilitar o próximo passo
         btnColher.disabled = false;
         btnColher.classList.add('active');
-    }, 2500); // 2.5 segundos de "chuva"
+    }, 2000); 
 });
 
-// 2. Ativar a Colheitadeira
+// Ação 2: Entrada da Colheitadeira Inteligente
 btnColher.addEventListener('click', () => {
-    statusEtapa.innerText = "A Tecnologia Agro em Ação!";
+    statusEtapa.innerText = fluxoEtapas.colheita.status;
     colheitadeira.classList.remove('esconder');
     colheitadeira.classList.add('mover');
     
-    // Atualizar card de texto
-    infoTitulo.innerText = textosInformativos.colheita.titulo;
-    infoDescricao.innerText = textosInformativos.colheita.descricao;
+    infoTitulo.innerText = fluxoEtapas.colheita.titulo;
+    infoDescricao.innerText = fluxoEtapas.colheita.descricao;
     
-    // Gerenciar Botões
     btnColher.disabled = true;
     btnColher.classList.remove('active');
 
-    // Simulação do tempo de colheita
     setTimeout(() => {
         plantaSoja.classList.add('colhida');
-        colheitadeira.classList.remove('mover'); // Para a animação
-        statusEtapa.innerText = "Colheita Finalizada. Partindo para Armazenagem.";
+        statusEtapa.innerText = "Volume colhido direcionado para a central de estocagem.";
         
-        // Habilitar o próximo passo
         btnArmazenar.disabled = false;
         btnArmazenar.classList.add('active');
-    }, 2500); // Tempo da animação da colheitadeira
+    }, 2200);
 });
 
-// 3. Encher o Silo
+// Ação 3: Enchimento do Silo Verde
 btnArmazenar.addEventListener('click', () => {
-    statusEtapa.innerText = "Soja Segura e Monitorada Digitalmente.";
-    nivelSilo.style.height = "100%"; // Enche o silo visualmente
-    colheitadeira.classList.add('esconder'); // Colheitadeira sai de cena
+    statusEtapa.innerText = fluxoEtapas.armazenamento.status;
+    nivelSilo.style.height = "100%"; // Sobe o nível da soja no silo
+    colheitadeira.classList.add('esconder');
     
-    // Atualizar card de texto
-    infoTitulo.innerText = textosInformativos.armazenamento.titulo;
-    infoDescricao.innerText = textosInformativos.armazenamento.descricao;
+    infoTitulo.innerText = fluxoEtapas.armazenamento.titulo;
+    infoDescricao.innerText = fluxoEtapas.armazenamento.descricao;
     
-    // Gerenciar Botões
     btnArmazenar.disabled = true;
     btnArmazenar.classList.remove('active');
 
     setTimeout(() => {
-        statusEtapa.innerText = "Ciclo Agro 4.0 Concluído!";
-        infoTitulo.innerText = "Sustentabilidade + Produtividade";
-        infoDescricao.innerText = "Este cenário demonstrou como a tecnologia de ponta permite que o agronegócio seja extremamente produtivo (força) enquanto utiliza recursos de forma inteligente (sustentabilidade).";
-    }, 2000);
+        statusEtapa.innerText = "Ciclo Logístico Sustentável 2050 Concluído.";
+    }, 2500);
 });

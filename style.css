@@ -1,14 +1,15 @@
-/* Configurações Globais */
+/* Reset e Base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-    background-color: #e0f7fa; /* Fundo azul claro e suave */
-    color: #333;
+    background: linear-gradient(180deg, #102a43px, #0b1d33);
+    background-color: #0f2042; /* Azul escuro tecnológico */
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,71 +19,90 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Placa Sustentável 2050 */
+.placa-2050 {
+    background: #03C988;
+    color: #000000;
+    font-weight: 900;
+    font-size: 1.4rem;
+    padding: 8px 24px;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px #ffd54f;
+    transform: rotate(-1deg);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
 }
 
 header h1 {
-    color: #1b5e20; /* Verde escuro do agro forte */
-    font-size: 2.2rem;
-    margin-bottom: 10px;
+    color: #03C988;
+    font-size: 2rem;
 }
 
 header p {
-    color: #555;
-    font-size: 1rem;
+    color: #bcccdc;
+    font-size: 0.95rem;
 }
 
-/* Container Principal do Cenário */
+/* Container do Cenário */
 .cenario-container {
     width: 100%;
-    max-width: 900px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    padding: 25px;
+    max-width: 950px;
+    background: #102a43;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    padding: 20px;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Paisagem e Fundo Azul */
+/* Céu Azul e Elementos Sustentáveis */
 .paisagem-fundo {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100px;
-    background: linear-gradient(180deg, #64b5f6 0%, #bbdefb 100%); /* Céu azul */
+    height: 120px;
+    background: linear-gradient(180deg, #1976d2 0%, #2196f3 100%); /* Céu Azul */
     z-index: 1;
+    padding: 15px;
 }
 
 .sol {
-    width: 50px;
-    height: 50px;
-    background-color: #ffeb3b;
+    width: 45px;
+    height: 45px;
+    background: #ffeb3b;
     border-radius: 50%;
     position: absolute;
     top: 15px;
-    right: 30px;
-    box-shadow: 0 0 20px #fff176;
+    right: 40px;
+    box-shadow: 0 0 20px #fff;
 }
 
-.nuvem {
-    background: #fff;
-    border-radius: 50px;
+.paineis-solares {
     position: absolute;
-    opacity: 0.8;
+    top: 65px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    border: 1px solid #03C988;
 }
 
-.nuvem-1 { width: 80px; height: 30px; top: 30px; left: 10%; }
-.nuvem-2 { width: 60px; height: 25px; top: 20px; left: 40%; }
-
-/* Campo Interativo Visual */
+/* Campo de Produção */
 .campo-interativo {
-    background: #795548; /* Solo fértil */
-    border: 4px solid #4caf50; /* Borda verde de sustentabilidade */
-    border-radius: 10px;
-    height: 300px;
-    margin-top: 80px; /* Desconto do céu */
+    background: #4e342e; /* Terra escura, rica em nutrientes */
+    border: 3px solid #03C988;
+    border-radius: 8px;
+    height: 280px;
+    margin-top: 105px;
     position: relative;
     z-index: 2;
     padding: 15px;
@@ -92,51 +112,162 @@ header p {
 }
 
 .etapa-texto {
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    align-self: center;
+    background: rgba(15, 32, 66, 0.85);
+    border-left: 4px solid #03C988;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    align-self: flex-start;
 }
 
-/* Elementos Visuais em Linha */
 .elementos-visuais {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    height: 180px;
+    height: 160px;
 }
 
-/* Estilos da Soja */
-.soja {
-    font-size: 3rem;
-    transition: all 2s ease-in-out;
-}
-
-.soja.semente { opacity: 0.5; transform: scale(0.8); }
-.soja.crescida {
-    font-size: 6rem;
-    transform: translateY(-10px);
-    color: #2e7d32;
-    filter: drop-shadow(0 0 10px #81c784);
-}
+/* Soja */
+.soja { font-size: 3.5rem; transition: all 1.8s ease; }
+.soja.crescida { font-size: 5.5rem; transform: translateY(-5px); }
 .soja.colhida { transform: scale(0); opacity: 0; }
 
-/* Estilos da Colheitadeira */
-.colheitadeira {
-    font-size: 5rem;
-    transition: transform 1.5s ease-in-out, opacity 0.5s;
+/* Colheitadeira */
+.colheitadeira { font-size: 4.5rem; transition: transform 2s ease-in-out; }
+.colheitadeira.mover { animation: trajetoColheita 2.2s forwards; }
+
+/* Silo Eco-Sustentável */
+.silo-eco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px;
 }
 
-.colheitadeira.mover {
-    animation: moverColheitadeira 2.5s forwards;
+.teto-silo {
+    width: 0;
+    height: 0;
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-bottom: 25px solid #627d98;
 }
 
-/* Estilos do Silo */
-.silo {
-    width: 80px;
-    height: 120px;
+.corpo-silo {
+    width: 100%;
+    height: 110px;
+    background: #9fb3c8;
+    border: 3px solid #627d98;
+    border-top: none;
     position: relative;
-    display
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.silo-conteudo {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: #ffd54f; /* Cor dos grãos */
+    transition: height 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.led-energia {
+    position: relative;
+    z-index: 3;
+    background: #000;
+    color: #03C988;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #03C988;
+    box-shadow: 0 0 5px #03C988;
+}
+
+.silo-label {
+    position: relative;
+    z-index: 3;
+    color: #102a43;
+    font-weight: 800;
+    font-size: 0.75rem;
+}
+
+/* Irrigação Tecnológica */
+.chuva-tech {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(3, 201, 136, 0.1), rgba(33, 150, 243, 0.4));
+    border-right: 2px dashed #03C988;
+    animation: pulsoIrrigacao 0.5s infinite alternate;
+}
+
+/* Painel e Controles */
+.painel-controle {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.btn {
+    background: #243b53;
+    color: #9fb3c8;
+    border: 1px solid #486581;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.3s;
+}
+
+.btn.active {
+    background: #03C988;
+    color: #000000;
+    border-color: #03C988;
+    box-shadow: 0 4px 12px rgba(3, 201, 136, 0.2);
+}
+
+.btn.active:hover {
+    background: #02a971;
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Card Informativo */
+.info-card {
+    background: #163554;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #ffd54f;
+}
+
+.info-card h3 { color: #ffd54f; font-size: 1.1rem; margin-bottom: 6px; }
+.info-card p { color: #f0f4f8; font-size: 0.9rem; line-height: 1.5; }
+
+.esconder { display: none !important; }
+
+/* Animações */
+@keyframes trajetoColheita {
+    0% { transform: translateX(-200px); }
+    100% { transform: translateX(50px); }
+}
+
+@keyframes pulsoIrrigacao {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+}
