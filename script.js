@@ -1,86 +1,86 @@
-// Captura dos Elementos do Mini Game
-const btnChuva = document.getElementById('btn-chuva');
+// Captura de Elementos da Interface
+const btnIrrigar = document.getElementById('btn-irrigar');
 const btnColher = document.getElementById('btn-colher');
-const chuvaSensor = document.getElementById('chuva-sensor');
-const campoPlantas = document.getElementById('campo-plantas');
-const veiculoColheita = document.getElementById('veiculo-colheita');
-const progressoSilo = document.getElementById('progresso-silo');
+const chuvaIrrigacao = document.getElementById('chuva-irrigacao');
+const areaPlantacao = document.getElementById('area-plantacao');
+const maquinaAgro = document.getElementById('maquina-agro');
+const medidorSilo = document.getElementById('medidor-silo');
 
-const totalDePlantas = 12; // Quantidade balanceada para preencher o espaço mantendo o tamanho grande
-const estagiosSoja = { semente: '🌱', broto: '🌿', madura: '🌾' };
+const totalPlantas = 12;
+const emojisCiclo = { semente: '🌱', broto: '🌿', madura: '🌾' };
 
-// Inicializa a lavoura preparando a terra com pequenas sementes
-function carregarNovoJogo() {
-    campoPlantas.innerHTML = '';
-    for (let i = 0; i < totalDePlantas; i++) {
+// Inicia o campo com sementes sob a terra fértil
+function inicializarCampo() {
+    areaPlantacao.innerHTML = '';
+    for (let i = 0; i < totalPlantas; i++) {
         const planta = document.createElement('div');
-        planta.classList.add('soja-unidade');
-        planta.innerText = estagiosSoja.semente;
-        campoPlantas.appendChild(planta);
+        planta.classList.add('soja-planta');
+        planta.innerText = emojisCiclo.semente;
+        areaPlantacao.appendChild(planta);
     }
 }
 
-// Mecânica 1: Ativação da Chuva Inteligente e Evolução do Plantio
-btnChuva.addEventListener('click', () => {
-    btnChuva.disabled = true;
-    chuvaSensor.className = 'chuva-ligada';
+// Lógica de Irrigação e Mudança de Cor/Crescimento da Soja
+btnIrrigar.addEventListener('click', () => {
+    btnIrrigar.disabled = true;
+    chuvaIrrigacao.className = 'irrigacao-ativa';
 
-    // Fase de Crescimento Foliar (2 segundos de chuva)
+    // 1º Estágio: Broto verde em pleno desenvolvimento
     setTimeout(() => {
-        transformarLavoura('vegetativo', estagiosSoja.broto);
+        atualizarEstagioPlantas('crescendo', emojisCiclo.broto);
     }, 2000);
 
-    // Fase de Maturação Final / Grãos Dourados (4.5 segundos de chuva)
+    // 2º Estágio: Soja madura, forte e pronta para colher
     setTimeout(() => {
-        transformarLavoura('maduro-colheita', estagiosSoja.madura);
-        chuvaSensor.className = 'chuva-desligada'; // Desliga a água automaticamente
-        btnColher.disabled = false; // Habilita o comando da colheitadeira
+        atualizarEstagioPlantas('madura', emojisCiclo.madura);
+        chuvaIrrigacao.className = 'irrigacao-desativada'; // Desliga a água automaticamente
+        btnColher.disabled = false; // Habilita o maquinário
     }, 4500);
 });
 
-function transformarLavoura(classeAplicada, emojiFase) {
-    const plantasAtuais = document.querySelectorAll('.soja-unidade');
-    plantasAtuais.forEach(planta => {
-        planta.className = `soja-unidade ${classeAplicada}`;
+function atualizarEstagioPlantas(classeCSS, emojiFase) {
+    const plantas = document.querySelectorAll('.soja-planta');
+    plantas.forEach(planta => {
+        planta.className = `soja-planta ${classeCSS}`;
         planta.innerText = emojiFase;
     });
 }
 
-// Mecânica 2: Movimentação do Condutor e Abastecimento Automático do Silo
+// Lógica de Colheita e Armazenamento no Silo
 btnColher.addEventListener('click', () => {
     btnColher.disabled = true;
     
-    // Desloca a colheitadeira cruzando toda a extensão do eixo horizontal
-    veiculoColheita.style.left = '1000px';
+    // Move a colheitadeira cruzando a plantação
+    maquinaAgro.style.left = '950px';
 
-    const plantasParaColher = document.querySelectorAll('.soja-unidade');
+    const plantasNoCampo = document.querySelectorAll('.soja-planta');
     
-    // Simula o corte da soja sequencialmente conforme o avanço da máquina
-    plantasParaColher.forEach((alvoPlanta, posicao) => {
+    // Conforme a plataforma de corte passa, a soja é armazenada
+    plantasNoCampo.forEach((planta, index) => {
         setTimeout(() => {
-            alvoPlanta.classList.add('colhido-sucesso');
+            planta.classList.add('colhida');
             
-            // Incrementa a medição do silo proporcionalmente à quantidade recolhida
-            let percentualSilo = Math.round(((posicao + 1) / totalDePlantas) * 100);
-            progressoSilo.innerText = `${percentualSilo}%`;
-        }, posicao * 320 + 900); // Ajuste fino para bater com o movimento visual do veículo
+            // Atualiza o painel digital do silo da fazenda
+            let capacidade = Math.round(((index + 1) / totalPlantas) * 100);
+            medidorSilo.innerText = `${capacidade}%`;
+        }, index * 300 + 900); // Sincronia com o chassi do veículo
     });
 
-    // Fim da rodada com feedback de sustentabilidade
+    // Finaliza o processo com mensagem explicativa sobre sustentabilidade
     setTimeout(() => {
-        progressoSilo.innerText = "100%";
-        alert("Excelente trabalho! Safra 2050 colhida com sucesso, protegendo a biodiversidade e utilizando energia renovável.");
+        medidorSilo.innerText = "100%";
+        alert("Sucesso! Colheita realizada mostrando a força do agro tecnológico e o respeito total ao meio ambiente!");
         
-        // Reseta o jogo para permitir novas jogadas no estande do Agrinho
+        // Retorna ao estado inicial após 4 segundos para nova simulação
         setTimeout(() => {
-            veiculoColheita.style.left = '-250px';
-            progressoSilo.innerText = "0%";
-            btnChuva.disabled = false;
-            carregarNovoJogo();
-        }, 3000);
+            maquinaAgro.style.left = '-240px';
+            medidorSilo.innerText = "0%";
+            btnIrrigar.disabled = false;
+            inicializarCampo();
+        }, 4000);
 
     }, 5500);
 });
 
-// Inicialização imediata ao abrir o simulador
-carregarNovoJogo();
+// Inicialização do Simulador
+inicializarCampo();

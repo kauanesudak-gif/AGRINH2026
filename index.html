@@ -3,68 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Game Agrinho 2050</title>
+    <title>AgroForte e Sustentável 2050</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container-jogo">
+    <div class="painel-principal">
         <header>
-            <h1>AGROFORTE 2050: O JOGO DA SUSTENTABILIDADE</h1>
-            <p>Ative a chuva inteligente para a soja crescer e depois dirija a colheitadeira para armazenar a safra no silo!</p>
-            <div class="controles">
-                <button id="btn-chuva" class="btn-game">🌧️ Ativar Chuva Inteligente</button>
-                <button id="btn-colher" class="btn-game" disabled>🚜 Dirigir Colheitadeira</button>
+            <h1>AGROFORTE: O FUTURO DA SOJA SUSTENTÁVEL</h1>
+            <p>Veja como a força do agro e a preservação do meio ambiente andam juntas com a tecnologia.</p>
+            <div class="botoes-controle">
+                <button id="btn-irrigar" class="botao-interativo">🌧️ Ativar Irrigação Inteligente</button>
+                <button id="btn-colher" class="botao-interativo" disabled>🚜 Iniciar Colheita Tecnológica</button>
             </div>
         </header>
 
-        <div class="tela-simulacao">
-            <div class="ambiente-ceu">
-                <div class="passaro-grande p1">🦅</div>
-                <div class="passaro-grande p2">🦅</div>
-                
-                <div class="usina-solar">
-                    <div class="placa"></div>
-                    <div class="placa"></div>
-                    <span class="tag-sustentavel">🔋 100% Energia Solar</span>
-                </div>
+        <div class="cenario-azul">
+            <div class="atmosfera">
+                <div class="passaros">🦅 🦅</div>
+                <div class="energia-solar">☀️ Painéis Solares Ativos (Pegada Zero de Carbono)</div>
             </div>
 
-            <div id="chuva-sensor" class="chuva-desligada"></div>
+            <div id="chuva-irrigacao" class="irrigacao-desativada"></div>
 
-            <div class="setor-fazenda">
-                <div class="animais-reserva" title="Animais vivendo em harmonia com a produção">
-                    🐄 🐎 🐑
-                    <span class="legenda-bloco">BIODIVERSIDADE</span>
-                </div>
-                
-                <div class="casa-sede">🏡<br><span class="legenda-bloco">SEDE</span></div>
-                
-                <div class="silo-futurista">
-                    <div class="topo-cone"></div>
-                    <div class="corpo-tanque">
-                        <span class="titulo-silo">SILO 2050</span>
-                        <div id="progresso-silo">0%</div>
+            <div class="complexo-agricola">
+                <div class="animais" title="Integração Lavoura-Pecuária">🐄 🐑</div>
+                <div class="sede-fazenda">🏡<br><span>SEDE</span></div>
+                <div class="silo-armazenagem">
+                    <div class="topo-silo"></div>
+                    <div class="corpo-silo">
+                        <p>SILO</p>
+                        <div id="medidor-silo">0%</div>
                     </div>
                 </div>
             </div>
 
-            <div class="campo-soja" id="campo-plantas">
+            <div class="campo-soja" id="area-plantacao">
                 </div>
 
-            <div class="colheitadeira-driver" id="veiculo-colheita">
-                <div class="cabine-vidro">
-                    <div class="produtor-condutor" title="Produtor dirigindo com monitoramento sustentável">🧑‍🌾</div>
+            <div class="colheitadeira-inteligente" id="maquina-agro">
+                <div class="cabine">
+                    <div class="condutor">🧑‍🌾</div>
                 </div>
-                <div class="corpo-vermelho"></div>
-                <div class="molinete-frontal"></div>
-                <div class="rodas-grandes">⚙️ ⚙️</div>
+                <div class="chassi"></div>
+                <div class="plataforma-corte"></div>
+                <div class="rodas">⚙️ ⚙️</div>
             </div>
         </div>
 
-        <footer>
-            <p>Projeto Agrinho 2050 — Produção de alimentos em perfeito equilíbrio com o meio ambiente.</p>
-        </footer>
+        <section class="painel-sustentavel">
+            <h2>💡 Como Funciona o Equilíbrio em 2050?</h2>
+            <div class="cards-explicativos">
+                <div class="card">
+                    <h3>1. Irrigação de Precisão</h3>
+                    <p>A água é aplicada na quantidade exata que a planta precisa através de sensores de umidade no solo, evitando o desperdício de recursos hídricos.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Maquinário de Alta Força</h3>
+                    <p>A colheitadeira inteligente colhe toneladas em minutos para garantir a máxima eficiência, movida a biocombustível ou eletricidade gerada na própria fazenda.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Armazenamento Seguro</h3>
+                    <p>O silo monitora a temperatura dos grãos via inteligência artificial, mantendo a qualidade da soja forte para exportação com o mínimo de perda.</p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script src="script.js"></script>
