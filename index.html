@@ -3,62 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Game: AgroForte 2050</title>
+    <title>Mini Game Agrinho 2050</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="interface-jogo">
+    <div class="container-jogo">
         <header>
-            <h1>AGROFORTE GIGANTE: MINI GAME SUSTENTÁVEL</h1>
-            <p>Objetivo: Ative a chuva inteligente, espere a soja amadurecer e controle a colheitadeira!</p>
-            
-            <div class="painel-comandos">
-                <button id="btn-chuva" class="btn-acao">🌧️ Ativar Chuva Inteligente</button>
-                <button id="btn-colher" class="btn-acao" disabled>🚜 Dirigir Colheitadeira</button>
+            <h1>AGROFORTE 2050: O JOGO DA SUSTENTABILIDADE</h1>
+            <p>Ative a chuva inteligente para a soja crescer e depois dirija a colheitadeira para armazenar a safra no silo!</p>
+            <div class="controles">
+                <button id="btn-chuva" class="btn-game">🌧️ Ativar Chuva Inteligente</button>
+                <button id="btn-colher" class="btn-game" disabled>🚜 Dirigir Colheitadeira</button>
             </div>
         </header>
 
-        <div class="tela-jogo">
-            <div class="camada-ceu">
-                <div class="grande-passaro p1">🦅</div>
-                <div class="grande-passaro p2">🦅</div>
+        <div class="tela-simulacao">
+            <div class="ambiente-ceu">
+                <div class="passaro-grande p1">🦅</div>
+                <div class="passaro-grande p2">🦅</div>
                 
-                <div class="sistema-solar">
-                    <div class="painel"></div>
-                    <div class="painel"></div>
-                    <p>🔋 ECO ENERGIA 100%</p>
+                <div class="usina-solar">
+                    <div class="placa"></div>
+                    <div class="placa"></div>
+                    <span class="tag-sustentavel">🔋 100% Energia Solar</span>
                 </div>
             </div>
 
-            <div id="chuva-efeito" class="chuva-desligada"></div>
+            <div id="chuva-sensor" class="chuva-desligada"></div>
 
-            <div class="zona-estruturas">
-                <div class="casa-fazenda">🏡<br><span>SEDE</span></div>
-                <div class="silo-armazenamento">
-                    <div class="cone-silo"></div>
-                    <div class="tanque-silo">
-                        <p>SILO</p>
-                        <div id="display-silo">0%</div>
+            <div class="setor-fazenda">
+                <div class="animais-reserva" title="Animais vivendo em harmonia com a produção">
+                    🐄 🐎 🐑
+                    <span class="legenda-bloco">BIODIVERSIDADE</span>
+                </div>
+                
+                <div class="casa-sede">🏡<br><span class="legenda-bloco">SEDE</span></div>
+                
+                <div class="silo-futurista">
+                    <div class="topo-cone"></div>
+                    <div class="corpo-tanque">
+                        <span class="titulo-silo">SILO 2050</span>
+                        <div id="progresso-silo">0%</div>
                     </div>
                 </div>
             </div>
 
-            <div class="campo-producao" id="campo-soja">
+            <div class="campo-soja" id="campo-plantas">
                 </div>
 
-            <div class="super-colheitadeira" id="veiculo-agricola">
-                <div class="cabine-piloto">
-                    <div class="piloto-agricultor">🧑‍🌾</div>
+            <div class="colheitadeira-driver" id="veiculo-colheita">
+                <div class="cabine-vidro">
+                    <div class="produtor-condutor" title="Produtor dirigindo com monitoramento sustentável">🧑‍🌾</div>
                 </div>
-                <div class="chassi-veiculo"></div>
-                <div class="sistema-corte"></div>
-                <div class="esteiras-rodas">⚙️ ⚙️</div>
+                <div class="corpo-vermelho"></div>
+                <div class="molinete-frontal"></div>
+                <div class="rodas-grandes">⚙️ ⚙️</div>
             </div>
         </div>
 
         <footer>
-            <p>Missão Agrinho: Produzir com tecnologia protegendo o meio ambiente.</p>
+            <p>Projeto Agrinho 2050 — Produção de alimentos em perfeito equilíbrio com o meio ambiente.</p>
         </footer>
     </div>
 

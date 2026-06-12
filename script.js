@@ -1,86 +1,86 @@
-// Controle de Elementos do Game
+// Captura dos Elementos do Mini Game
 const btnChuva = document.getElementById('btn-chuva');
 const btnColher = document.getElementById('btn-colher');
-const chuvaEfeito = document.getElementById('chuva-efeito');
-const campoSoja = document.getElementById('campo-soja');
-const veiculoAgricola = document.getElementById('veiculo-agricola');
-const displaySilo = document.getElementById('display-silo');
+const chuvaSensor = document.getElementById('chuva-sensor');
+const campoPlantas = document.getElementById('campo-plantas');
+const veiculoColheita = document.getElementById('veiculo-colheita');
+const progressoSilo = document.getElementById('progresso-silo');
 
-const qtdPlantas = 10; // Reduzido para aumentar o espaçamento e visualização
-const iconesCiclo = { semente: '🌱', broto: '🌿', maduro: '🌾' };
+const totalDePlantas = 12; // Quantidade balanceada para preencher o espaço mantendo o tamanho grande
+const estagiosSoja = { semente: '🌱', broto: '🌿', madura: '🌾' };
 
-// Função Inicial: Preparar o Solo com Sementes
-function iniciarNovoJogo() {
-    campoSoja.innerHTML = '';
-    for (let i = 0; i < qtdPlantas; i++) {
+// Inicializa a lavoura preparando a terra com pequenas sementes
+function carregarNovoJogo() {
+    campoPlantas.innerHTML = '';
+    for (let i = 0; i < totalDePlantas; i++) {
         const planta = document.createElement('div');
-        planta.classList.add('planta-soja');
-        planta.innerText = iconesCiclo.semente;
-        campoSoja.appendChild(planta);
+        planta.classList.add('soja-unidade');
+        planta.innerText = estagiosSoja.semente;
+        campoPlantas.appendChild(planta);
     }
 }
 
-// Mecanismo 1: Sistema de Chuva e Crescimento Foliar
+// Mecânica 1: Ativação da Chuva Inteligente e Evolução do Plantio
 btnChuva.addEventListener('click', () => {
     btnChuva.disabled = true;
-    chuvaEfeito.className = 'chuva-ligada';
+    chuvaSensor.className = 'chuva-ligada';
 
-    // Tempo 1: Soja absorve água e vira broto verde
+    // Fase de Crescimento Foliar (2 segundos de chuva)
     setTimeout(() => {
-        mudarEstagioSoja('fase-broto', iconesCiclo.broto);
+        transformarLavoura('vegetativo', estagiosSoja.broto);
     }, 2000);
 
-    // Tempo 2: Soja atinge maturação dourada ideal
+    // Fase de Maturação Final / Grãos Dourados (4.5 segundos de chuva)
     setTimeout(() => {
-        mudarEstagioSoja('fase-madura', iconesCiclo.maduro);
-        chuvaEfeito.className = 'chuva-desligada'; // Desliga automação de água
-        btnColher.disabled = false; // Desbloqueia controle da máquina
+        transformarLavoura('maduro-colheita', estagiosSoja.madura);
+        chuvaSensor.className = 'chuva-desligada'; // Desliga a água automaticamente
+        btnColher.disabled = false; // Habilita o comando da colheitadeira
     }, 4500);
 });
 
-function mudarEstagioSoja(novaClasse, novoEmoji) {
-    const sementes = document.querySelectorAll('.planta-soja');
-    sementes.forEach(item => {
-        item.className = `planta-soja ${novaClasse}`;
-        item.innerText = novoEmoji;
+function transformarLavoura(classeAplicada, emojiFase) {
+    const plantasAtuais = document.querySelectorAll('.soja-unidade');
+    plantasAtuais.forEach(planta => {
+        planta.className = `soja-unidade ${classeAplicada}`;
+        planta.innerText = emojiFase;
     });
 }
 
-// Mecanismo 2: Colheita Mecanizada e Armazenamento em Silo
+// Mecânica 2: Movimentação do Condutor e Abastecimento Automático do Silo
 btnColher.addEventListener('click', () => {
     btnColher.disabled = true;
     
-    // Movimenta o vetor da colheitadeira ao longo do eixo X (horizontal)
-    veiculoAgricola.style.left = '950px';
+    // Desloca a colheitadeira cruzando toda a extensão do eixo horizontal
+    veiculoColheita.style.left = '1000px';
 
-    const plantasNoCampo = document.querySelectorAll('.planta-soja');
+    const plantasParaColher = document.querySelectorAll('.soja-unidade');
     
-    // Efeito de corte progressivo baseado na passagem física do maquinário
-    plantasNoCampo.forEach((alvo, posicao) => {
+    // Simula o corte da soja sequencialmente conforme o avanço da máquina
+    plantasParaColher.forEach((alvoPlanta, posicao) => {
         setTimeout(() => {
-            alvo.classList.add('fase-colhida');
+            alvoPlanta.classList.add('colhido-sucesso');
             
-            // Incremento digital imediato do silo acoplado à fazenda
-            let cargaAtual = Math.round(((posicao + 1) / qtdPlantas) * 100);
-            displaySilo.innerText = `${cargaAtual}%`;
-        }, posicao * 350 + 1000); // Sincronização calculada
+            // Incrementa a medição do silo proporcionalmente à quantidade recolhida
+            let percentualSilo = Math.round(((posicao + 1) / totalDePlantas) * 100);
+            progressoSilo.innerText = `${percentualSilo}%`;
+        }, posicao * 320 + 900); // Ajuste fino para bater com o movimento visual do veículo
     });
 
-    // Fim da rodada e ciclo de sustentabilidade concluído
+    // Fim da rodada com feedback de sustentabilidade
     setTimeout(() => {
-        displaySilo.innerText = "100%";
-        alert("Parabéns! Missão Cumprida: Alimento colhido com sucesso e armazenado no silo usando 100% de energia limpa!");
+        progressoSilo.innerText = "100%";
+        alert("Excelente trabalho! Safra 2050 colhida com sucesso, protegendo a biodiversidade e utilizando energia renovável.");
         
-        // Sistema de auto-reset para demonstração infinita no estande do Agrinho
+        // Reseta o jogo para permitir novas jogadas no estande do Agrinho
         setTimeout(() => {
-            veiculoAgricola.style.left = '-240px';
-            displaySilo.innerText = "0%";
+            veiculoColheita.style.left = '-250px';
+            progressoSilo.innerText = "0%";
             btnChuva.disabled = false;
-            iniciarNovoJogo();
+            carregarNovoJogo();
         }, 3000);
 
     }, 5500);
 });
 
-// Inicialização Automática do Game
-iniciarNovoJogo();
+// Inicialização imediata ao abrir o simulador
+carregarNovoJogo();
