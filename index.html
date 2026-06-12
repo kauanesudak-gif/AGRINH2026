@@ -3,42 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroSustentável: O Ciclo da Soja Tech</title>
+    <title>AgroSustentável Interativo - Ciclo da Soja Tech</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>AgroSustentável: A Força da Tecnologia no Campo</h1>
-        <p>Ative as etapas abaixo para ver como a tecnologia e a sustentabilidade andam juntas.</p>
+        <h1>Agro 4.0: Produtividade e Sustentabilidade</h1>
+        <p>Interaja com o cenário e descubra como a tecnologia une a força do agro à preservação ambiental.</p>
     </header>
 
-    <main class="cenario-principal">
-        <div class="campo-container">
-            <div id="status-agro" class="status-texto">Fase Inicial: Solo Preparado</div>
+    <main class="cenario-container">
+        
+        <div class="paisagem-fundo">
+            <div class="sol"></div>
+            <div class="nuvem nuvem-1"></div>
+            <div class="nuvem nuvem-2"></div>
+        </div>
+
+        <div class="campo-interativo" id="campo">
+            <div id="status-etapa" class="etapa-texto">Aguardando Início...</div>
             
-            <div class="elementos-graficos">
-                <div id="soja" class="soja semente">🌱</div>
-                <div id="maquina" class="maquina oculta">🚜</div>
+            <div class="elementos-visuais">
+                <div id="soja-planta" class="soja semente">🌱</div>
+                
+                <div id="colheitadeira" class="colheitadeira esconder">🚜</div>
+                
                 <div id="silo" class="silo">
-                    <div class="progresso-silo" id="progresso-silo"></div>
-                    <span>Silo</span>
+                    <div class="silo-base"></div>
+                    <div class="silo-conteudo" id="silo-nivel"></div>
+                    <span class="silo-label">SILO</span>
                 </div>
             </div>
+            
+            <div id="irrigacao-efeito" class="chuva esconder"></div>
         </div>
 
         <section class="painel-controle">
-            <button id="btn-irrigar" class="btn">1. Ativar Irrigação Inteligente</button>
-            <button id="btn-colher" class="btn" disabled>2. Iniciar Colheita Autônoma</button>
-            <button id="btn-armazenar" class="btn" disabled>3. Abastecer Silo Automatizado</button>
+            <button id="btn-irrigar" class="btn active">1. Ativar Irrigação Inteligente</button>
+            <button id="btn-colher" class="btn" disabled>2. Iniciar Colheita Tech</button>
+            <button id="btn-armazenar" class="btn" disabled>3. Abastecer Silo</button>
         </section>
 
-        <section class="conteudo-informativo">
-            <div id="info-card" class="card">
-                <h3>Sustentabilidade + Produtividade</h3>
-                <p>Clique nos botões acima para acompanhar o ciclo e entender como o agro moderno produz mais gastando menos recursos.</p>
-            </div>
+        <section class="info-card">
+            <h3 id="info-titulo">Pronto para começar?</h3>
+            <p id="info-descricao">Clique no primeiro botão para iniciar o ciclo da soja sustentável utilizando tecnologia de ponta.</p>
         </section>
+
     </main>
 
     <script src="script.js"></script>

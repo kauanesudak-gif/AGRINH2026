@@ -3,69 +3,103 @@ const btnIrrigar = document.getElementById('btn-irrigar');
 const btnColher = document.getElementById('btn-colher');
 const btnArmazenar = document.getElementById('btn-armazenar');
 
-const soja = document.getElementById('soja');
-const maquina = document.getElementById('maquina');
-const progressoSilo = document.getElementById('progresso-silo');
-const statusAgro = document.getElementById('status-agro');
-const infoCard = document.getElementById('info-card');
+const plantaSoja = document.getElementById('soja-planta');
+const colheitadeira = document.getElementById('colheitadeira');
+const nivelSilo = document.getElementById('silo-nivel');
+const efeitoIrrigacao = document.getElementById('irrigacao-efeito');
+const statusEtapa = document.getElementById('status-etapa');
 
-// Textos educativos e técnicos
-const informacoes = {
+const infoTitulo = document.getElementById('info-titulo');
+const infoDescricao = document.getElementById('info-descricao');
+
+// Dados explicativos para cada etapa (Unindo Agro e Sustentabilidade)
+const textosInformativos = {
     irrigacao: {
-        titulo: "💧 Irrigação de Precisão (Gotejamento Inteligente)",
-        texto: "A força do agro moderno começa no uso eficiente da água. Sensores no solo detectam a umidade exata de que a planta precisa, evitando o desperdício. Menos água consumida, máxima produtividade por hectare."
+        titulo: "Etapa 1: Irrigação Inteligente e Sustentável",
+        descricao: "Utilizamos sensores de umidade no solo e previsões climáticas em tempo real. A água é aplicada na quantidade exata, evitando desperdício e protegendo os lençóis freáticos, garantindo uma produção forte com baixo impacto hídrico."
     },
     colheita: {
-        titulo: "🚜 Colheitadeira Inteligente e Autônoma",
-        texto: "Equipadas com inteligência artificial, telemetria e GPS, as colheitadeiras atuais mapeiam o rendimento do solo em tempo real. Elas reduzem o esmagamento de plantas e otimizam o combustível, mostrando a potência tecnológica do setor."
+        titulo: "Etapa 2: A Força da Colheita Autônoma e Eficiente",
+        descricao: "A Colheitadeira Inteligente entra em ação. Guiada por GPS de alta precisão e equipada com Inteligência Artificial, ela mapeia o rendimento da lavoura e otimiza a rota, reduzindo o consumo de combustível e a compactação do solo, demonstrando o poder da tecnologia no campo."
     },
-    silo: {
-        titulo: "🌾 Armazenamento Sustentável e Segurança Alimentar",
-        texto: "O silo vertical otimiza o espaço físico e possui controle digital de temperatura para evitar perdas pós-colheita. O Brasil alimenta milhões de pessoas usando tecnologia de ponta para garantir grãos de alta qualidade com baixa pegada de carbono."
+    armazenamento: {
+        titulo: "Etapa 3: Rastreabilidade e Segurança Alimentar",
+        descricao: "O silo se enche. Com monitoramento digital de temperatura e umidade, garantimos a qualidade dos grãos por mais tempo, reduzindo perdas pós-colheita e garantindo a rastreabilidade necessária para os mercados mais exigentes."
     }
 };
 
-// Passo 1: Irrigação e Crescimento
+// Funções de interação
+
+// 1. Ativar Irrigação e Crescer a Soja
 btnIrrigar.addEventListener('click', () => {
-    statusAgro.innerText = "Irrigando com Precisão... A Soja está crescendo!";
-    soja.innerText = "🌿";
-    soja.classList.add('crescida');
+    // Feedback visual imediato
+    statusEtapa.innerText = "Irrigando a Lavour... Aguarde o crescimento.";
+    efeitoIrrigacao.classList.remove('esconder');
     
-    // Atualiza o card informativo
-    infoCard.querySelector('h3').innerText = informacoes.irrigacao.titulo;
-    infoCard.querySelector('p').innerText = informacoes.irrigacao.texto;
-
-    // Gerencia botões
+    // Atualizar card de texto
+    infoTitulo.innerText = textosInformativos.irrigacao.titulo;
+    infoDescricao.innerText = textosInformativos.irrigacao.descricao;
+    
+    // Gerenciar Botões
     btnIrrigar.disabled = true;
-    btnColher.disabled = false;
-});
+    btnIrrigar.classList.remove('active');
 
-// Passo 2: Colheitadeira em ação
-btnColher.addEventListener('click', () => {
-    statusAgro.innerText = "Colheitadeira Inteligente em Campo!";
-    maquina.classList.remove('oculta');
-    maquina.classList.add('movimento');
-    
+    // Simulação do crescimento após a irrigação
     setTimeout(() => {
-        soja.classList.add('colhida');
-        statusAgro.innerText = "Soja Colhida com Sucesso! Pronta para o Silo.";
-    }, 1200);
-
-    infoCard.querySelector('h3').innerText = informacoes.colheita.titulo;
-    infoCard.querySelector('p').innerText = informacoes.colheita.texto;
-
-    btnColher.disabled = true;
-    btnArmazenar.disabled = false;
+        efeitoIrrigacao.classList.add('esconder');
+        plantaSoja.innerText = "🌿";
+        plantaSoja.classList.add('crescida');
+        statusEtapa.innerText = "Soja Pronta para a Colheita!";
+        
+        // Habilitar o próximo passo
+        btnColher.disabled = false;
+        btnColher.classList.add('active');
+    }, 2500); // 2.5 segundos de "chuva"
 });
 
-// Passo 3: Encher o Silo
+// 2. Ativar a Colheitadeira
+btnColher.addEventListener('click', () => {
+    statusEtapa.innerText = "A Tecnologia Agro em Ação!";
+    colheitadeira.classList.remove('esconder');
+    colheitadeira.classList.add('mover');
+    
+    // Atualizar card de texto
+    infoTitulo.innerText = textosInformativos.colheita.titulo;
+    infoDescricao.innerText = textosInformativos.colheita.descricao;
+    
+    // Gerenciar Botões
+    btnColher.disabled = true;
+    btnColher.classList.remove('active');
+
+    // Simulação do tempo de colheita
+    setTimeout(() => {
+        plantaSoja.classList.add('colhida');
+        colheitadeira.classList.remove('mover'); // Para a animação
+        statusEtapa.innerText = "Colheita Finalizada. Partindo para Armazenagem.";
+        
+        // Habilitar o próximo passo
+        btnArmazenar.disabled = false;
+        btnArmazenar.classList.add('active');
+    }, 2500); // Tempo da animação da colheitadeira
+});
+
+// 3. Encher o Silo
 btnArmazenar.addEventListener('click', () => {
-    statusAgro.innerText = "Silo Abastecido e Monitorado via Software";
-    progressoSilo.style.height = "100%";
-    maquina.classList.add('oculta');
-
-    infoCard.querySelector('h3').innerText = informacoes.silo.titulo;
-    infoCard.querySelector('p').innerText = informacoes.silo.texto;
-
+    statusEtapa.innerText = "Soja Segura e Monitorada Digitalmente.";
+    nivelSilo.style.height = "100%"; // Enche o silo visualmente
+    colheitadeira.classList.add('esconder'); // Colheitadeira sai de cena
+    
+    // Atualizar card de texto
+    infoTitulo.innerText = textosInformativos.armazenamento.titulo;
+    infoDescricao.innerText = textosInformativos.armazenamento.descricao;
+    
+    // Gerenciar Botões
     btnArmazenar.disabled = true;
+    btnArmazenar.classList.remove('active');
+
+    setTimeout(() => {
+        statusEtapa.innerText = "Ciclo Agro 4.0 Concluído!";
+        infoTitulo.innerText = "Sustentabilidade + Produtividade";
+        infoDescricao.innerText = "Este cenário demonstrou como a tecnologia de ponta permite que o agronegócio seja extremamente produtivo (força) enquanto utiliza recursos de forma inteligente (sustentabilidade).";
+    }, 2000);
 });

@@ -1,4 +1,4 @@
-/* Configurações Gerais */
+/* Configurações Globais */
 * {
     margin: 0;
     padding: 0;
@@ -7,12 +7,12 @@
 }
 
 body {
-    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Fundo azul moderno */
-    color: #ffffff;
-    min-height: 100vh;
+    background-color: #e0f7fa; /* Fundo azul claro e suave */
+    color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
     padding: 20px;
 }
 
@@ -22,167 +22,121 @@ header {
 }
 
 header h1 {
+    color: #1b5e20; /* Verde escuro do agro forte */
     font-size: 2.2rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
 }
 
 header p {
-    color: #e0e0e0;
-    margin-top: 5px;
+    color: #555;
+    font-size: 1rem;
 }
 
-/* Cenário Interativo */
-.cenario-principal {
+/* Container Principal do Cenário */
+.cenario-container {
     width: 100%;
     max-width: 900px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: #fff;
     border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
-.campo-container {
-    background: #5d4037; /* Cor da terra fértil */
-    border: 4px solid #4caf50;
-    border-radius: 10px;
-    height: 250px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 25px;
     position: relative;
     overflow: hidden;
-    margin-bottom: 25px;
+}
+
+/* Paisagem e Fundo Azul */
+.paisagem-fundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(180deg, #64b5f6 0%, #bbdefb 100%); /* Céu azul */
+    z-index: 1;
+}
+
+.sol {
+    width: 50px;
+    height: 50px;
+    background-color: #ffeb3b;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    box-shadow: 0 0 20px #fff176;
+}
+
+.nuvem {
+    background: #fff;
+    border-radius: 50px;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.nuvem-1 { width: 80px; height: 30px; top: 30px; left: 10%; }
+.nuvem-2 { width: 60px; height: 25px; top: 20px; left: 40%; }
+
+/* Campo Interativo Visual */
+.campo-interativo {
+    background: #795548; /* Solo fértil */
+    border: 4px solid #4caf50; /* Borda verde de sustentabilidade */
+    border-radius: 10px;
+    height: 300px;
+    margin-top: 80px; /* Desconto do céu */
+    position: relative;
+    z-index: 2;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px;
 }
 
-.status-texto {
-    background: rgba(0, 0, 0, 0.6);
+.etapa-texto {
+    background: rgba(0,0,0,0.7);
+    color: #fff;
     padding: 5px 15px;
     border-radius: 20px;
-    align-self: center;
-    font-weight: bold;
     font-size: 1.1rem;
+    font-weight: bold;
+    align-self: center;
 }
 
-.elementos-graficos {
+/* Elementos Visuais em Linha */
+.elementos-visuais {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    height: 150px;
+    height: 180px;
 }
 
-/* Elementos da Simulação */
+/* Estilos da Soja */
 .soja {
     font-size: 3rem;
-    transition: all 1.5s ease-in-out;
+    transition: all 2s ease-in-out;
 }
 
+.soja.semente { opacity: 0.5; transform: scale(0.8); }
 .soja.crescida {
-    font-size: 5rem;
+    font-size: 6rem;
     transform: translateY(-10px);
+    color: #2e7d32;
+    filter: drop-shadow(0 0 10px #81c784);
+}
+.soja.colhida { transform: scale(0); opacity: 0; }
+
+/* Estilos da Colheitadeira */
+.colheitadeira {
+    font-size: 5rem;
+    transition: transform 1.5s ease-in-out, opacity 0.5s;
 }
 
-.soja.colhida {
-    transform: scale(0);
-    opacity: 0;
+.colheitadeira.mover {
+    animation: moverColheitadeira 2.5s forwards;
 }
 
-.maquina {
-    font-size: 4rem;
-    transition: all 1s ease;
-}
-
-.maquina.oculta {
-    display: none;
-}
-
-.maquina.movimento {
-    animation: colherAnima 2s forwards;
-}
-
+/* Estilos do Silo */
 .silo {
     width: 80px;
-    height: 110px;
-    border: 3px solid #b0bec5;
-    background: #cfd8dc;
-    border-radius: 5px 5px 0 0;
+    height: 120px;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #37474f;
-    font-weight: bold;
-    overflow: hidden;
-}
-
-.progresso-silo {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0%;
-    background: #ffd54f; /* Cor dos grãos de soja */
-    transition: height 2s ease-in-out;
-}
-
-.silo span {
-    z-index: 2;
-}
-
-/* Painel de Botões */
-.painel-controle {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-bottom: 25px;
-}
-
-.btn {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
-    flex: 1;
-}
-
-.btn:hover:not(:disabled) {
-    background-color: #45a049;
-    transform: translateY(-2px);
-}
-
-.btn:disabled {
-    background-color: #9e9e9e;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-/* Cartão Informativo */
-.conteudo-informativo {
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 5px solid #4caf50;
-}
-
-.card h3 {
-    color: #2e7d32;
-    margin-bottom: 8px;
-}
-
-.card p {
-    line-height: 1.6;
-}
-
-/* Animações */
-@keyframes colherAnima {
-    0% { transform: translateX(-50px); }
-    50% { transform: translateX(20px) scaleX(-1); }
-    100% { transform: translateX(0px); }
-}
+    display
