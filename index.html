@@ -3,72 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroForte e Sustentável 2050</title>
+    <title>AgroSustentável: O Ciclo da Soja Tech</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="painel-principal">
-        <header>
-            <h1>AGROFORTE: O FUTURO DA SOJA SUSTENTÁVEL</h1>
-            <p>Veja como a força do agro e a preservação do meio ambiente andam juntas com a tecnologia.</p>
-            <div class="botoes-controle">
-                <button id="btn-irrigar" class="botao-interativo">🌧️ Ativar Irrigação Inteligente</button>
-                <button id="btn-colher" class="botao-interativo" disabled>🚜 Iniciar Colheita Tecnológica</button>
-            </div>
-        </header>
+    <header>
+        <h1>AgroSustentável: A Força da Tecnologia no Campo</h1>
+        <p>Ative as etapas abaixo para ver como a tecnologia e a sustentabilidade andam juntas.</p>
+    </header>
 
-        <div class="cenario-azul">
-            <div class="atmosfera">
-                <div class="passaros">🦅 🦅</div>
-                <div class="energia-solar">☀️ Painéis Solares Ativos (Pegada Zero de Carbono)</div>
-            </div>
-
-            <div id="chuva-irrigacao" class="irrigacao-desativada"></div>
-
-            <div class="complexo-agricola">
-                <div class="animais" title="Integração Lavoura-Pecuária">🐄 🐑</div>
-                <div class="sede-fazenda">🏡<br><span>SEDE</span></div>
-                <div class="silo-armazenagem">
-                    <div class="topo-silo"></div>
-                    <div class="corpo-silo">
-                        <p>SILO</p>
-                        <div id="medidor-silo">0%</div>
-                    </div>
+    <main class="cenario-principal">
+        <div class="campo-container">
+            <div id="status-agro" class="status-texto">Fase Inicial: Solo Preparado</div>
+            
+            <div class="elementos-graficos">
+                <div id="soja" class="soja semente">🌱</div>
+                <div id="maquina" class="maquina oculta">🚜</div>
+                <div id="silo" class="silo">
+                    <div class="progresso-silo" id="progresso-silo"></div>
+                    <span>Silo</span>
                 </div>
-            </div>
-
-            <div class="campo-soja" id="area-plantacao">
-                </div>
-
-            <div class="colheitadeira-inteligente" id="maquina-agro">
-                <div class="cabine">
-                    <div class="condutor">🧑‍🌾</div>
-                </div>
-                <div class="chassi"></div>
-                <div class="plataforma-corte"></div>
-                <div class="rodas">⚙️ ⚙️</div>
             </div>
         </div>
 
-        <section class="painel-sustentavel">
-            <h2>💡 Como Funciona o Equilíbrio em 2050?</h2>
-            <div class="cards-explicativos">
-                <div class="card">
-                    <h3>1. Irrigação de Precisão</h3>
-                    <p>A água é aplicada na quantidade exata que a planta precisa através de sensores de umidade no solo, evitando o desperdício de recursos hídricos.</p>
-                </div>
-                <div class="card">
-                    <h3>2. Maquinário de Alta Força</h3>
-                    <p>A colheitadeira inteligente colhe toneladas em minutos para garantir a máxima eficiência, movida a biocombustível ou eletricidade gerada na própria fazenda.</p>
-                </div>
-                <div class="card">
-                    <h3>3. Armazenamento Seguro</h3>
-                    <p>O silo monitora a temperatura dos grãos via inteligência artificial, mantendo a qualidade da soja forte para exportação com o mínimo de perda.</p>
-                </div>
+        <section class="painel-controle">
+            <button id="btn-irrigar" class="btn">1. Ativar Irrigação Inteligente</button>
+            <button id="btn-colher" class="btn" disabled>2. Iniciar Colheita Autônoma</button>
+            <button id="btn-armazenar" class="btn" disabled>3. Abastecer Silo Automatizado</button>
+        </section>
+
+        <section class="conteudo-informativo">
+            <div id="info-card" class="card">
+                <h3>Sustentabilidade + Produtividade</h3>
+                <p>Clique nos botões acima para acompanhar o ciclo e entender como o agro moderno produz mais gastando menos recursos.</p>
             </div>
         </section>
-    </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

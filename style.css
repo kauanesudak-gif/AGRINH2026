@@ -1,337 +1,188 @@
-/* Reset Geral */
+/* Configurações Gerais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial Black', Gadget, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #0d47a1; /* Fundo azul principal */
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Fundo azul moderno */
+    color: #ffffff;
     min-height: 100vh;
-}
-
-.painel-principal {
-    width: 100%;
-    max-width: 1000px;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    overflow: hidden;
-    border: 5px solid #ffffff;
-}
-
-/* Cabeçalho */
-header {
-    background: linear-gradient(135deg, #1b5e20, #004d40);
-    color: white;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 1.8rem;
-    text-shadow: 2px 2px #000;
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 header p {
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    color: #a5d6a7;
+    color: #e0e0e0;
     margin-top: 5px;
 }
 
-.botoes-controle {
-    margin-top: 15px;
+/* Cenário Interativo */
+.cenario-principal {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
-.botao-interativo {
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    border: 2px solid #fff;
-    border-radius: 35px;
-    cursor: pointer;
-    margin: 5px;
-    box-shadow: 0 4px 0px #000;
-    transition: transform 0.1s;
-}
-
-#btn-irrigar { background-color: #0288d1; }
-#btn-colher { background-color: #ff6d00; }
-
-.botao-interativo:active:not(:disabled) {
-    transform: translateY(3px);
-    box-shadow: 0 1px 0px #000;
-}
-
-.botao-interativo:disabled {
-    background-color: #9e9e9e !important;
-    color: #e0e0e0 !important;
-    border-color: #9e9e9e !important;
-    box-shadow: none;
-    cursor: not-allowed;
-}
-
-/* Cenário com Fundo Azul */
-.cenario-azul {
+.campo-container {
+    background: #5d4037; /* Cor da terra fértil */
+    border: 4px solid #4caf50;
+    border-radius: 10px;
+    height: 250px;
     position: relative;
-    height: 460px;
-    background: linear-gradient(to bottom, #1e88e5 50%, #43a047 50%); /* Céu azul vibrante e solo verde fértil */
     overflow: hidden;
-}
-
-.atmosfera {
-    padding: 15px;
+    margin-bottom: 25px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    color: white;
+    padding: 15px;
 }
 
-.passaros {
-    font-size: 2.5rem;
-    animation: voar 15s infinite linear;
-    position: absolute;
+.status-texto {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+    align-self: center;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
-@keyframes voar {
-    0% { left: -100px; }
-    100% { left: 110%; }
-}
-
-.energia-solar {
-    background: rgba(0, 0, 0, 0.4);
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    border: 1px solid #ffd600;
-    color: #ffd600;
-    position: absolute;
-    right: 15px;
-    top: 15px;
-}
-
-/* Efeito de Irrigação */
-#chuva-irrigacao {
-    position: absolute;
-    top: 50%;
-    left: 280px;
-    width: 700px;
-    height: 35%;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.irrigacao-ativa {
-    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(3,169,244,0.4));
-    background-size: 100% 30px;
-    animation: simularChuva 0.2s infinite linear;
-}
-
-@keyframes simularChuva {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 60px; }
-}
-
-/* Complexo da Fazenda e Silo */
-.complexo-agricola {
-    position: absolute;
-    bottom: 50%;
-    left: 15px;
+.elementos-graficos {
     display: flex;
+    justify-content: space-around;
     align-items: flex-end;
-    gap: 15px;
-    margin-bottom: -10px;
+    height: 150px;
 }
 
-.animais {
-    font-size: 2.2rem;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 5px;
-    border-radius: 10px;
-    border: 2px solid #1b5e20;
+/* Elementos da Simulação */
+.soja {
+    font-size: 3rem;
+    transition: all 1.5s ease-in-out;
 }
 
-.sede-fazenda {
+.soja.crescida {
     font-size: 5rem;
-    text-align: center;
-    line-height: 1;
+    transform: translateY(-10px);
 }
 
-.sede-fazenda span {
-    font-size: 0.75rem;
-    background: #004d40;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
+.soja.colhida {
+    transform: scale(0);
+    opacity: 0;
 }
 
-.silo-armazenagem {
-    width: 85px;
+.maquina {
+    font-size: 4rem;
+    transition: all 1s ease;
 }
 
-.topo-silo {
-    width: 0;
-    height: 0;
-    border-left: 42.5px solid transparent;
-    border-right: 42.5px solid transparent;
-    border-bottom: 25px solid #37474f;
+.maquina.oculta {
+    display: none;
 }
 
-.corpo-silo {
-    width: 85px;
-    height: 130px;
-    background-color: #b0bec5;
-    border: 3px solid #37474f;
-    border-top: none;
-    text-align: center;
-    padding-top: 15px;
+.maquina.movimento {
+    animation: colherAnima 2s forwards;
 }
 
-.corpo-silo p {
-    font-size: 0.8rem;
-    color: #263238;
-}
-
-#medidor-silo {
-    margin-top: 15px;
-    font-size: 1.3rem;
-    background: white;
-    color: #2e7d32;
-    border: 2px solid #2e7d32;
-    border-radius: 5px;
-    display: inline-block;
-    padding: 2px 6px;
-}
-
-/* Plantação de Soja */
-.campo-soja {
-    position: absolute;
-    bottom: 20px;
-    left: 280px;
-    width: 700px;
-    height: 180px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    align-items: end;
-    justify-items: center;
-    background: rgba(0,0,0,0.1);
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.soja-planta {
-    font-size: 3.5rem;
-    transition: all 0.6s ease;
-    transform: scale(0.2);
-}
-
-.soja-planta.crescendo { transform: scale(0.75); }
-.soja-planta.madura { transform: scale(1.3); filter: drop-shadow(2px 2px 0px #000); }
-.soja-planta.colhida { opacity: 0; transform: scale(0) translateY(-40px); }
-
-/* Colheitadeira Interativa */
-.colheitadeira-inteligente {
-    position: absolute;
-    bottom: 30px;
-    left: -240px;
-    width: 210px;
-    height: 140px;
-    transition: left 4.8s linear;
-    z-index: 5;
-}
-
-.cabine {
-    width: 75px;
-    height: 65px;
-    background-color: rgba(179, 229, 252, 0.85);
-    border: 4px solid #0288d1;
-    border-radius: 12px 12px 0 0;
-    position: absolute;
-    top: 0;
-    right: 30px;
+.silo {
+    width: 80px;
+    height: 110px;
+    border: 3px solid #b0bec5;
+    background: #cfd8dc;
+    border-radius: 5px 5px 0 0;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #37474f;
+    font-weight: bold;
+    overflow: hidden;
 }
 
-.condutor {
-    font-size: 2.5rem;
-}
-
-.chassi {
-    width: 150px;
-    height: 55px;
-    background-color: #cc1111; /* Vermelho que simboliza a força das grandes máquinas */
-    border: 3px solid #880000;
+.progresso-silo {
     position: absolute;
-    bottom: 15px;
-    right: 0;
-    border-radius: 8px;
-}
-
-.plataforma-corte {
-    width: 65px;
-    height: 40px;
-    background-color: #212121;
-    border: 2px solid #ffffff;
-    position: absolute;
-    bottom: 15px;
+    bottom: 0;
     left: 0;
-    border-radius: 4px;
-}
-
-.rodas {
-    position: absolute;
-    bottom: -10px;
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    font-size: 2.4rem;
+    height: 0%;
+    background: #ffd54f; /* Cor dos grãos de soja */
+    transition: height 2s ease-in-out;
 }
 
-/* Painel Educativo */
-.painel-sustentavel {
-    padding: 25px;
-    background-color: #f5f5f5;
-    border-top: 4px solid #1b5e20;
+.silo span {
+    z-index: 2;
 }
 
-.painel-sustentavel h2 {
-    text-align: center;
-    color: #1b5e20;
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-}
-
-.cards-explicativos {
+/* Painel de Botões */
+.painel-controle {
     display: flex;
     gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
 }
 
-.card {
+.btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
     flex: 1;
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border-left: 5px solid #0288d1;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    background-color: #9e9e9e;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Cartão Informativo */
+.conteudo-informativo {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #4caf50;
 }
 
 .card h3 {
-    font-size: 1rem;
-    color: #212121;
+    color: #2e7d32;
     margin-bottom: 8px;
 }
 
 .card p {
-    font-family: Arial, sans-serif;
-    font-size: 0.85rem;
-    color: #555;
-    line-height: 1.4;
+    line-height: 1.6;
+}
+
+/* Animações */
+@keyframes colherAnima {
+    0% { transform: translateX(-50px); }
+    50% { transform: translateX(20px) scaleX(-1); }
+    100% { transform: translateX(0px); }
 }
