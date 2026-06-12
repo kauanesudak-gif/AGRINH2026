@@ -1,190 +1,93 @@
-const rainBtn = document.getElementById("rainBtn");
-const sunBtn = document.getElementById("sunBtn");
-const futureBtn = document.getElementById("futureBtn");
-const resetBtn = document.getElementById("resetBtn");
+// Seleção de elementos do DOM
+const btnChuva = document.getElementById('btn-chuva');
+const btnColher = document.getElementById('btn-colher');
+const chuvaContainer = document.getElementById('chuva-container');
+const campo = document.getElementById('campo');
+const maquina = document.getElementById('maquina');
+const painelSilo = document.getElementById('Painel-silo');
 
-const growthText = document.getElementById("growthText");
-const waterText = document.getElementById("waterText");
-const ecoText = document.getElementById("ecoText");
+// Configuração inicial da plantação
+const totalPlantas = 20;
+let estagioCrescimento = 0; // 0: Semente, 1: Broto Verde, 2: Maduro Pronto
 
-const rainSound = document.getElementById("rainSound");
+// Emojis representando a evolução da soja até a colheita
+const fasesSoja = {
+    semente: '🌱', // Pequeno broto inicial
+    brotando: '🌿', // Planta crescendo verde
+    madura: '🌾'   // Soja dourada pronta para colheita
+};
 
-const tractor = document.getElementById("tractor");
-
-const soyPlants = document.querySelectorAll(".soy");
-const leaves = document.querySelectorAll(".leaf");
-
-const message = document.getElementById("message");
-
-let growth = 0;
-let water = 50;
-let eco = 100;
-
-function updateFarm(){
-
-  growthText.innerText = growth + "%";
-  waterText.innerText = water + "%";
-  ecoText.innerText = eco + "%";
-
-  soyPlants.forEach(soy => {
-
-    soy.style.height = (100 + growth * 2) + "px";
-
-  });
-
-  // mudança de cor
-
-  if(growth < 30){
-
-    leaves.forEach(leaf => {
-      leaf.style.background = "#2e7d32";
-    });
-
-  }
-
-  else if(growth < 70){
-
-    leaves.forEach(leaf => {
-      leaf.style.background = "#8bc34a";
-    });
-
-  }
-
-  else{
-
-    leaves.forEach(leaf => {
-      leaf.style.background = "#d4e157";
-    });
-
-  }
-
-  if(growth >= 100){
-
-    message.innerText =
-      "🌾 Plantação pronta para colheita sustentável!";
-
-  }
-
+// Inicializa o campo com sementes
+function iniciarPlantacao() {
+    campo.innerHTML = '';
+    for (let i = 0; i < totalPlantas; i++) {
+        const planta = document.createElement('div');
+        planta.classList.add('soja');
+        planta.innerText = fasesSoja.semente;
+        campo.appendChild(planta);
+    }
 }
 
-rainBtn.addEventListener("click", () => {
+// Mecanismo de Chuva e Crescimento Sustentável
+btnChuva.addEventListener('click', () => {
+    // Ativa o visual da chuva
+    chuvaContainer.className = 'chuva-ativa';
+    btnChuva.disabled = true;
 
-  createRain();
-
-  rainSound.play();
-
-  growth += 10;
-  water += 10;
-
-  if(growth > 100){
-    growth = 100;
-  }
-
-  if(water > 100){
-    water = 100;
-  }
-
-  message.innerText =
-    "🌧️ Irrigação inteligente ativada!";
-
-  updateFarm();
-
-});
-
-sunBtn.addEventListener("click", () => {
-
-  growth += 5;
-
-  water -= 5;
-
-  if(water < 0){
-    water = 0;
-  }
-
-  if(growth > 100){
-    growth = 100;
-  }
-
-  message.innerText =
-    "☀️ Energia solar acelerou o crescimento!";
-
-  updateFarm();
-
-});
-
-futureBtn.addEventListener("click", () => {
-
-  document.body.classList.toggle("future-mode");
-
-  tractor.style.animation =
-    "tractorMove 8s linear infinite";
-
-  message.innerText =
-    "🛰️ Agro 2050 ativado: drones, IA e sustentabilidade!";
-
-});
-
-resetBtn.addEventListener("click", () => {
-
-  growth = 0;
-  water = 50;
-  eco = 100;
-
-  document.body.classList.remove("future-mode");
-
-  tractor.style.animation = "none";
-
-  message.innerText =
-    "🌱 Nova safra iniciada.";
-
-  updateFarm();
-
-});
-
-function createRain(){
-
-  for(let i = 0; i < 120; i++){
-
-    const drop = document.createElement("div");
-
-    drop.classList.add("raindrop");
-
-    drop.style.left =
-      Math.random() * window.innerWidth + "px";
-
-    drop.style.top = "0px";
-
-    drop.style.animationDuration =
-      (Math.random() * 1 + 0.5) + "s";
-
-    document.body.appendChild(drop);
-
+    // Simula o ciclo de crescimento com a água
     setTimeout(() => {
-      drop.remove();
+        atualizarPlantacao('brotando', fasesSoja.brotando);
     }, 2000);
 
-  }
+    setTimeout(() => {
+        atualizarPlantacao('madura', fasesSoja.madura);
+        chuvaContainer.className = 'chuva-escondida'; // Desliga a chuva
+        btnColher.disabled = false; // Libera a colheitadeira
+    }, 5000);
+});
 
+function atualizarPlantacao(classe, emoji) {
+    const plantas = document.querySelectorAll('.soja');
+    plantas.forEach(planta => {
+        planta.className = `soja ${classe}`;
+        planta.innerText = emoji;
+    });
 }
 
-const style = document.createElement("style");
+// Mecanismo de Colheita Autônoma Inteligente
+btnColher.addEventListener('click', () => {
+    btnColher.disabled = true;
+    
+    // Move a colheitadeira cruzando o campo (Animação CSS via JS)
+    maquina.style.left = '750px';
 
-style.innerHTML = `
+    // Simula o corte da soja conforme a máquina passa
+    const plantas = document.querySelectorAll('.soja');
+    
+    plantas.forEach((planta, index) => {
+        setTimeout(() => {
+            planta.classList.add('colhida');
+            // Atualiza o painel digital do silo proporcionalmente
+            let progresso = Math.round(((index + 1) / totalPlantas) * 100);
+            painelSilo.innerText = `${progresso}%`;
+        }, index * 200); // Efeito cascata de colheita
+    });
 
-@keyframes tractorMove{
+    // Reseta o ciclo após o término da colheita para permitir jogar novamente
+    setTimeout(() => {
+        alert("Colheita de 2050 concluída com sucesso! Alta produtividade com pegada zero de carbono.");
+        maquina.style.left = '-180px'; // Retorna a máquina
+        painelSilo.innerText = '100% Cheio';
+        
+        // Reiniciar após alguns segundos
+        setTimeout(() => {
+            painelSilo.innerText = '0%';
+            btnChuva.disabled = false;
+            iniciarPlantacao();
+        }, 3000);
 
-  from{
-    left:-200px;
-  }
+    }, 5500);
+});
 
-  to{
-    left:110%;
-  }
-
-}
-
-`;
-
-document.head.appendChild(style);
-
-updateFarm();
+// Inicializa a fazenda ao carregar a página
+iniciarPlantacao();

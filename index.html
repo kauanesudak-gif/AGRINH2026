@@ -1,122 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agro 2050 - Fazenda Sustentável</title>
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrinho 2050: Agro Forte e Sustentável</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>🌱 Agro Forte 2050</h1>
-    <p>Futuro sustentável entre tecnologia e natureza</p>
-  </header>
+    <header>
+        <h1>Agro Forte, Futuro Sustentável: 2050</h1>
+        <p>Equilíbrio perfeito entre alta produção tecnológica e preservação ambiental.</p>
+        <div class="controles">
+            <button id="btn-chuva">🌧️ Iniciar Chuva Ecológica</button>
+            <button id="btn-colher" disabled>🚜 Iniciar Colheita Autônoma</button>
+        </div>
+    </header>
 
-  <section class="dashboard">
+    <main class="cenario">
+        <div class="nuvens"></div>
+        <div id="chuva-container" class="chuva-escondida"></div>
 
-    <div class="card">
-      <h2>🌾 Crescimento</h2>
-      <span id="growthText">0%</span>
-    </div>
+        <div class="energia-solar">☀️ Painéis Solares Ativos</div>
+        <div class="biodiversidade">🦌 Reserva de Animais Nativos</div>
 
-    <div class="card">
-      <h2>💧 Água</h2>
-      <span id="waterText">50%</span>
-    </div>
+        <div class="silo">
+            <div class="topo-silo"></div>
+            <div class="corpo-silo">SILO 2050<br><span id="Painel-silo">0%</span></div>
+        </div>
 
-    <div class="card">
-      <h2>🌎 Sustentabilidade</h2>
-      <span id="ecoText">100%</span>
-    </div>
+        <div class="campo-soja" id="campo">
+            </div>
 
-  </section>
+        <div class="colheitadeira" id="maquina">
+            <div class="cabine">
+                <div class="operador" title="Operador monitorando IA">🧑‍✈️</div>
+            </div>
+            <div class="plataforma"></div>
+            <div class="rodas">⚙️ ⚙️</div>
+        </div>
+    </main>
 
-  <section class="farm">
+    <footer>
+        <p>Projeto AgroForte 2050 - Cultivando a vida com equilíbrio e tecnologia.</p>
+    </footer>
 
-    <div class="sky">
-
-      <div class="sun"></div>
-
-      <div class="cloud"></div>
-
-      <div class="bird bird1">🕊️</div>
-      <div class="bird bird2">🦋</div>
-
-    </div>
-
-    <div class="future-city">
-      🛰️ 🚁 🌐
-    </div>
-
-    <div class="tractor" id="tractor">
-      🚜
-    </div>
-
-    <div class="soy-field">
-
-      <div class="soy" id="soy1">
-        <div class="stem"></div>
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
-      </div>
-
-      <div class="soy" id="soy2">
-        <div class="stem"></div>
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
-      </div>
-
-      <div class="soy" id="soy3">
-        <div class="stem"></div>
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
-      </div>
-
-      <div class="soy" id="soy4">
-        <div class="stem"></div>
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
-      </div>
-
-      <div class="soy" id="soy5">
-        <div class="stem"></div>
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
-      </div>
-
-    </div>
-
-    <div class="ground"></div>
-
-  </section>
-
-  <section class="controls">
-
-    <button id="rainBtn">🌧️ Chuva Inteligente</button>
-
-    <button id="sunBtn">☀️ Energia Solar</button>
-
-    <button id="futureBtn">🛰️ Agro 2050</button>
-
-    <button id="resetBtn">🔄 Reiniciar</button>
-
-  </section>
-
-  <div class="message" id="message">
-    Cuide da plantação usando tecnologia sustentável 🌿
-  </div>
-
-  <footer>
-    Projeto Agrinho 2026 • Agro Forte Futuro Sustentável 🌎
-  </footer>
-
-  <audio id="rainSound">
-    <source src="https://www.soundjay.com/nature/rain-01.mp3" type="audio/mpeg">
-  </audio>
-
-  <script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
