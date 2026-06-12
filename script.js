@@ -1,4 +1,3 @@
-// Captura de Elementos
 const btnChuva = document.getElementById('btn-chuva');
 const btnColher = document.getElementById('btn-colher');
 const chuvaContainer = document.getElementById('chuva-container');
@@ -6,11 +5,11 @@ const campo = document.getElementById('campo');
 const maquina = document.getElementById('maquina');
 const statusSilo = document.getElementById('status-silo');
 
-const numPlantas = 16;
+const numPlantas = 12; // Menos plantas para que fiquem maiores na tela
 const fasesSoja = { semente: '🌱', broto: '🌿', madura: '🌾' };
 
-// Popula o campo inicialmente
-function gerarCampo() {
+// Desenha a plantação inicial na tela
+function construirPlantacao() {
     campo.innerHTML = '';
     for (let i = 0; i < numPlantas; i++) {
         const planta = document.createElement('div');
@@ -20,69 +19,67 @@ function gerarCampo() {
     }
 }
 
-// Lógica da Chuva Inteligente e Crescimento
+// Ativa a chuva inteligente e faz a soja crescer e mudar de cor
 btnChuva.addEventListener('click', () => {
     btnChuva.disabled = true;
     chuvaContainer.className = 'chuva-ativa';
 
-    // Crescendo para broto verde
+    // 1º Estágio: Broto verde crescendo
     setTimeout(() => {
-        ajustarFasePlanta('crescendo', fasesSoja.broto);
+        atualizarSoja('crescendo', fasesSoja.broto);
     }, 2000);
 
-    // Amadurecendo para soja dourada pronta
+    // 2º Estágio: Maduro e Dourado pronto para a colheitadeira
     setTimeout(() => {
-        ajustarFasePlanta('madura', fasesSoja.madura);
-        chuvaContainer.className = 'chuva-desativada'; // Desliga a chuva automaticamente
-        btnColher.disabled = false; // Habilita a colheitadeira
+        atualizarSoja('madura', fasesSoja.madura);
+        chuvaContainer.className = 'chuva-desativada'; // Desliga a água
+        btnColher.disabled = false; // Libera o botão de colher
     }, 4500);
 });
 
-function ajustarFasePlanta(classeCSS, emoji) {
+function atualizarSoja(classeVisual, emoji) {
     const plantas = document.querySelectorAll('.soja');
     plantas.forEach(planta => {
-        planta.className = `soja ${classeCSS}`;
+        planta.className = `soja ${classeVisual}`;
         planta.innerText = emoji;
     });
 }
 
-// Lógica de Movimentação da Colheitadeira e Armazenamento no Silo
+// Faz a grande colheitadeira passar colhendo e enchendo o silo perto da fazenda
 btnColher.addEventListener('click', () => {
     btnColher.disabled = true;
     
-    // Move a máquina da esquerda para a direita atravessando a plantação
-    maquina.style.left = '750px';
+    // Movimenta a grande máquina até o outro lado da tela
+    maquina.style.left = '900px';
 
     const plantas = document.querySelectorAll('.soja');
     
-    // Executa a colheita em sincronia com o movimento da máquina
+    // Sumir com as plantas à medida que a máquina passa e alimentar o Silo
     plantas.forEach((planta, index) => {
         setTimeout(() => {
             planta.classList.add('colhida');
             
-            // Atualiza a porcentagem de armazenamento do silo em tempo real
-            let totalColhido = Math.round(((index + 1) / numPlantas) * 100);
-            statusSilo.innerText = `${totalColhido}%`;
-        }, index * 250 + 1200); // Delay calculado para acompanhar a posição da colheitadeira
+            // Cálculos de porcentagem de armazenamento do silo
+            let totalSilo = Math.round(((index + 1) / numPlantas) * 100);
+            statusSilo.innerText = `${totalSilo}%`;
+        }, index * 300 + 1000); // Sincronia perfeita com o tamanho da máquina
     });
 
-    // Finaliza o ciclo e prepara o reset sustentável
+    // Conclusão e reinício automático
     setTimeout(() => {
-        statusSilo.innerText = "100% Cheio";
-        statusSilo.style.color = "#2e7d32";
-        alert("Colheita Sustentável concluída! Alimentos colhidos e armazenados com energia limpa e automação.");
+        statusSilo.innerText = "100%";
+        alert("Sucesso! Colheita realizada com tecnologia sustentável de alta produtividade!");
         
-        // Reseta o cenário para nova demonstração após 4 segundos
+        // Retorna tudo ao padrão para demonstração contínua
         setTimeout(() => {
-            maquina.style.left = '-160px';
+            maquina.style.left = '-220px';
             statusSilo.innerText = "0%";
-            statusSilo.style.color = "#1b5e20";
             btnChuva.disabled = false;
-            gerarCampo();
-        }, 4000);
+            construirPlantacao();
+        }, 3000);
 
     }, 5500);
 });
 
-// Inicialização
-gerarCampo();
+// Inicializa a maquete digital
+construirPlantacao();
